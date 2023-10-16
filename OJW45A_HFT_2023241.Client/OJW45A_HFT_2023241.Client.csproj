@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OJW45A_HFT_2023241.Endpoint\OJW45A_HFT_2023241.Endpoint.csproj" />
+    <ProjectReference Include="..\OJW45A_HFT_2023241.Logic\OJW45A_HFT_2023241.Logic.csproj" />
+    <ProjectReference Include="..\OJW45A_HFT_2023241.Models\OJW45A_HFT_2023241.Models.csproj" />
+    <ProjectReference Include="..\OJW45A_HFT_2023241.Repository\OJW45A_HFT_2023241.Repository.csproj" />
+    <ProjectReference Include="..\OJW45A_HFT_2023241.Test\OJW45A_HFT_2023241.Test.csproj" />
+  </ItemGroup>
+
+</Project>
