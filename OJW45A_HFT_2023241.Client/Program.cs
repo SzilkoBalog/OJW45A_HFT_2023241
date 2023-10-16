@@ -6,7 +6,8 @@ namespace OJW45A_HFT_2023241.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //Hope this works
+            
         }
     }
 }
