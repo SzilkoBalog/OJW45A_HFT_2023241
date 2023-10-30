@@ -27,6 +27,9 @@ namespace OJW45A_HFT_2023241.Models
         [NotMapped]
         public ICollection<Equipment> Equipment { get; set; }
 
+        [NotMapped]
+        public virtual ArmyBase ArmyBase { get; set; }
+
         [ForeignKey(nameof(ArmyBase))]
         public int ArmyBaseId { get; set; }
 

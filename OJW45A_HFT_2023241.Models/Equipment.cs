@@ -24,6 +24,9 @@ namespace OJW45A_HFT_2023241.Models
 
         public int Weight {  get; set; }
 
+        [NotMapped]
+        public virtual Soldier Soldier { get; set; }
+
         [ForeignKey(nameof(Soldier))]
         public int SoldierId { get; set; }
 

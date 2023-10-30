@@ -22,7 +22,19 @@ namespace OJW45A_HFT_2023241.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Soldier>(soldier => soldier
+            .HasOne(soldier => soldier.ArmyBase)
+            .WithMany(armyBase => armyBase.Soldiers)
+            .HasForeignKey(soldier => soldier.ArmyBaseId)
+            .OnDelete(DeleteBehavior.Cascade)
+            );
+
+            modelBuilder.Entity<Equipment>(equipment => equipment
+            .HasOne(equipment => equipment.Soldier)
+            .WithMany(soldier => soldier.Equipment)
+            .HasForeignKey(equipment => equipment.SoldierId)
+            .OnDelete(DeleteBehavior.Cascade)
+            );
         }
     }
 }
