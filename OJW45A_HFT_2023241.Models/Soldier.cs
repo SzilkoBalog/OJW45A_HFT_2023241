@@ -25,7 +25,7 @@ namespace OJW45A_HFT_2023241.Models
         public int Weight { get; set; }
 
         [NotMapped]
-        public ICollection<Equipment> Equipment { get; set; }
+        public virtual ICollection<Equipment> Equipment { get; set; }
 
         [NotMapped]
         public virtual ArmyBase ArmyBase { get; set; }

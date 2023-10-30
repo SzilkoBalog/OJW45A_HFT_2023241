@@ -22,7 +22,7 @@ namespace OJW45A_HFT_2023241.Models
         public int DateOfBuild { get; set; }
 
         [NotMapped]
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
 
         public ArmyBase()
         {
