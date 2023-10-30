@@ -71,16 +71,16 @@ namespace OJW45A_HFT_2023241.Repository
 
             // Seed data for Equipment
             modelBuilder.Entity<Equipment>().HasData(
-                new Equipment { Id = "1", Type = "Weapon", Description = "Standard issue rifle", Weight = 6, SoldierId = 1 },
-                new Equipment { Id = "2", Type = "Gear", Description = "Night vision goggles", Weight = 4, SoldierId = 2 },
-                new Equipment { Id = "3", Type = "Weapon", Description = "Sniper rifle", Weight = 8, SoldierId = 3 },
-                new Equipment { Id = "4", Type = "Gear", Description = "Tactical vest", Weight = 5, SoldierId = 4 },
-                new Equipment { Id = "5", Type = "Weapon", Description = "Submachine gun", Weight = 7, SoldierId = 5 },
-                new Equipment { Id = "6", Type = "Gear", Description = "Camouflage uniform", Weight = 3, SoldierId = 6 },
-                new Equipment { Id = "7", Type = "Weapon", Description = "Assault rifle", Weight = 9, SoldierId = 7 },
-                new Equipment { Id = "8", Type = "Gear", Description = "Protective helmet", Weight = 2, SoldierId = 8 },
-                new Equipment { Id = "9", Type = "Weapon", Description = "Pistol", Weight = 4, SoldierId = 9 },
-                new Equipment { Id = "10", Type = "Gear", Description = "First aid kit", Weight = 1, SoldierId = 10 }
+                new Equipment { Id = 1, Type = "Weapon", Description = "Standard issue rifle", Weight = 6, SoldierId = 1 },
+                new Equipment { Id = 2, Type = "Gear", Description = "Night vision goggles", Weight = 4, SoldierId = 2 },
+                new Equipment { Id = 3, Type = "Weapon", Description = "Sniper rifle", Weight = 8, SoldierId = 3 },
+                new Equipment { Id = 4, Type = "Gear", Description = "Tactical vest", Weight = 5, SoldierId = 4 },
+                new Equipment { Id = 5, Type = "Weapon", Description = "Submachine gun", Weight = 7, SoldierId = 5 },
+                new Equipment { Id = 6, Type = "Gear", Description = "Camouflage uniform", Weight = 3, SoldierId = 6 },
+                new Equipment { Id = 7, Type = "Weapon", Description = "Assault rifle", Weight = 9, SoldierId = 7 },
+                new Equipment { Id = 8, Type = "Gear", Description = "Protective helmet", Weight = 2, SoldierId = 8 },
+                new Equipment { Id = 9, Type = "Weapon", Description = "Pistol", Weight = 4, SoldierId = 9 },
+                new Equipment { Id = 10, Type = "Gear", Description = "First aid kit", Weight = 1, SoldierId = 10 }
             );
         }
     }

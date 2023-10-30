@@ -13,7 +13,7 @@ namespace OJW45A_HFT_2023241.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string Id { get; set; }//Serial number of the equipment
+        public int Id { get; set; }//Serial number of the equipment
 
         [Required]
         [StringLength(50)]
