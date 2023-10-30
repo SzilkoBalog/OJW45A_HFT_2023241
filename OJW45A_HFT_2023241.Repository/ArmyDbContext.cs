@@ -19,9 +19,8 @@ namespace OJW45A_HFT_2023241.Repository
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string conn = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\TemporaryDb.mdf;Integrated Security=True;MultipleActiveResultSets = True";
-                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(conn);
-                //.UseInMemoryDatabase("DATABASE");
+                optionsBuilder.UseLazyLoadingProxies()
+                .UseInMemoryDatabase("DATABASE");
             }
         }
 

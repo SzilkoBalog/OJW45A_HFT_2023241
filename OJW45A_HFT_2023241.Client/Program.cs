@@ -9,8 +9,6 @@ namespace OJW45A_HFT_2023241.Client
     {
         static void Main(string[] args)
         {
-            //"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\TemporaryDb.mdf;Integrated Security=True;MultipleActiveResultSets = True"
-
             IRepository<Soldier> repo1 = new SoldierRepository(new ArmyDbContext ());
             
             var items = repo1.ReadAll().ToArray();
