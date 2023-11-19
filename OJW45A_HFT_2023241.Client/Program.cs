@@ -1,4 +1,5 @@
 ﻿using OJW45A_HFT_2023241.Logic;
+using OJW45A_HFT_2023241.Logic.Logics;
 using OJW45A_HFT_2023241.Models;
 using OJW45A_HFT_2023241.Repository;
 using System;

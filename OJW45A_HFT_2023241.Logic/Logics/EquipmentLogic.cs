@@ -1,11 +1,12 @@
-﻿using OJW45A_HFT_2023241.Models;
+﻿using OJW45A_HFT_2023241.Logic.LogicInterfaces;
+using OJW45A_HFT_2023241.Models;
 using OJW45A_HFT_2023241.Repository;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OJW45A_HFT_2023241.Logic
+namespace OJW45A_HFT_2023241.Logic.Logics
 {
     public class EquipmentLogic : IEquipmentLogic
     {

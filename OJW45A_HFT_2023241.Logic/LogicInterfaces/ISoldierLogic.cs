@@ -1,7 +1,7 @@
 ﻿using OJW45A_HFT_2023241.Models;
 using System.Collections.Generic;
 
-namespace OJW45A_HFT_2023241.Logic
+namespace OJW45A_HFT_2023241.Logic.LogicInterfaces
 {
     public interface ISoldierLogic
     {
@@ -12,6 +12,6 @@ namespace OJW45A_HFT_2023241.Logic
         void Update(Soldier item);
 
         IEnumerable<KeyValuePair<Soldier, IEnumerable<string>>> GetSoldiersWithEquipmentTypes();
-        IEnumerable<KeyValuePair<Soldier, int>> GetSoldiersWithTotalEquipmentWeight();     
+        IEnumerable<KeyValuePair<Soldier, int>> GetSoldiersWithTotalEquipmentWeight();
     }
 }

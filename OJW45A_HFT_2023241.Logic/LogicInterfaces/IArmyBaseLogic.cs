@@ -1,7 +1,8 @@
-﻿using OJW45A_HFT_2023241.Models;
+﻿using OJW45A_HFT_2023241.Logic.Logics;
+using OJW45A_HFT_2023241.Models;
 using System.Collections.Generic;
 
-namespace OJW45A_HFT_2023241.Logic
+namespace OJW45A_HFT_2023241.Logic.LogicInterfaces
 {
     public interface IArmyBaseLogic
     {
