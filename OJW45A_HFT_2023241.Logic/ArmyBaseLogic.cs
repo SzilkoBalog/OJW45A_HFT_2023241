@@ -18,7 +18,7 @@ namespace OJW45A_HFT_2023241.Logic
 
         public void Create(ArmyBase item)
         {
-            if (item.Name == null || item.Name.Length>50 || item.DateOfBuild ==0 || item.NumberOfBeds == 0)//Checks if the values are eligible
+            if (item.Name == null || item.Name.Length>50 || item.DateOfBuild == DateTime.MinValue || item.NumberOfBeds == 0)//Checks if the values are eligible
             {
                 throw new ArgumentException("Wrong name || name length || dateofbuild || numberofbeds");
             }

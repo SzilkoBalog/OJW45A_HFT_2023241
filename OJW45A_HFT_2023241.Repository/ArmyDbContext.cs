@@ -42,16 +42,16 @@ namespace OJW45A_HFT_2023241.Repository
 
             // Seed data for ArmyBase
             modelBuilder.Entity<ArmyBase>().HasData(
-                new ArmyBase { Id = 1, Name = "Base Alpha", NumberOfBeds = 100, DateOfBuild = 2000 },
-                new ArmyBase { Id = 2, Name = "Base Bravo", NumberOfBeds = 200, DateOfBuild = 2001 },
-                new ArmyBase { Id = 3, Name = "Base Charlie", NumberOfBeds = 300, DateOfBuild = 2002 },
-                new ArmyBase { Id = 4, Name = "Base Delta", NumberOfBeds = 400, DateOfBuild = 2003 },
-                new ArmyBase { Id = 5, Name = "Base Echo", NumberOfBeds = 500, DateOfBuild = 2004 },
-                new ArmyBase { Id = 6, Name = "Base Foxtrot", NumberOfBeds = 600, DateOfBuild = 2005 },
-                new ArmyBase { Id = 7, Name = "Base Golf", NumberOfBeds = 700, DateOfBuild = 2006 },
-                new ArmyBase { Id = 8, Name = "Base Hotel", NumberOfBeds = 800, DateOfBuild = 2007 },
-                new ArmyBase { Id = 9, Name = "Base India", NumberOfBeds = 900, DateOfBuild = 2008 },
-                new ArmyBase { Id = 10, Name = "Base Juliet", NumberOfBeds = 1000, DateOfBuild = 2009 }
+                new ArmyBase { Id = 1, Name = "Base Alpha", NumberOfBeds = 100, DateOfBuild = new DateTime(2000,10,10)},
+                new ArmyBase { Id = 2, Name = "Base Bravo", NumberOfBeds = 200, DateOfBuild = new DateTime(2001, 10, 10) },
+                new ArmyBase { Id = 3, Name = "Base Charlie", NumberOfBeds = 300, DateOfBuild = new DateTime(2002, 10, 10) },
+                new ArmyBase { Id = 4, Name = "Base Delta", NumberOfBeds = 400, DateOfBuild = new DateTime(2003, 10, 10) },
+                new ArmyBase { Id = 5, Name = "Base Echo", NumberOfBeds = 500, DateOfBuild = new DateTime(2004, 10, 10) },
+                new ArmyBase { Id = 6, Name = "Base Foxtrot", NumberOfBeds = 600, DateOfBuild = new DateTime(2005, 10, 10) },
+                new ArmyBase { Id = 7, Name = "Base Golf", NumberOfBeds = 700, DateOfBuild = new DateTime(2006, 10, 10) },
+                new ArmyBase { Id = 8, Name = "Base Hotel", NumberOfBeds = 800, DateOfBuild = new DateTime(2007, 10, 10) },
+                new ArmyBase { Id = 9, Name = "Base India", NumberOfBeds = 900, DateOfBuild = new DateTime(2008, 10, 10) },
+                new ArmyBase { Id = 10, Name = "Base Juliet", NumberOfBeds = 1000, DateOfBuild = new DateTime(2009, 10, 10) }
             );
 
             // Seed data for Soldiers

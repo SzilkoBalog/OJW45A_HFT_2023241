@@ -28,7 +28,7 @@ namespace OJW45A_HFT_2023241.Client
             }
             try
             {
-                test.Create(new ArmyBase {Name = "Base Alpha", NumberOfBeds = 100, DateOfBuild = 2000 });
+                test.Create(new ArmyBase {Name = "Base Alpha", NumberOfBeds = 100, DateOfBuild = new DateTime(2002, 10, 10) });
             }
             catch (Exception e)
             {
@@ -36,7 +36,7 @@ namespace OJW45A_HFT_2023241.Client
             }
             try
             {
-                test.Create(new ArmyBase { Id = 1, Name = "Base Alpha", DateOfBuild = 2000 });
+                test.Create(new ArmyBase { Id = 1, Name = "Base Alpha", DateOfBuild = new DateTime(2002, 10, 10) });
             }
             catch (Exception e)
             {

@@ -19,7 +19,7 @@ namespace OJW45A_HFT_2023241.Models
         [Required]
         public int NumberOfBeds { get; set; }
 
-        public int DateOfBuild { get; set; }
+        public DateTime DateOfBuild { get; set; }
 
         [NotMapped]
         public virtual ICollection<Soldier> Soldiers { get; set; }
