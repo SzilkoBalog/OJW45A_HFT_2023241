@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{D0792F
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OJW45A_HFT_2023241.Endpoint", "OJW45A_HFT_2023241.Endpoint\OJW45A_HFT_2023241.Endpoint.csproj", "{FBB955BD-4617-44DD-8D9E-F699783883AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{872D2338-E943-4D44-97D6-01EDFCDEBFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{872D2338-E943-4D44-97D6-01EDFCDEBFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{872D2338-E943-4D44-97D6-01EDFCDEBFD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB955BD-4617-44DD-8D9E-F699783883AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB955BD-4617-44DD-8D9E-F699783883AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB955BD-4617-44DD-8D9E-F699783883AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB955BD-4617-44DD-8D9E-F699783883AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{B7BAC0DA-4E1E-49D3-AD88-86C8AD1C1DFC} = {C97D2B16-BBAC-41AA-9709-4358E6D14126}
 		{2EEBD69C-09A3-4316-A5E3-CE7EAFCB0704} = {C97D2B16-BBAC-41AA-9709-4358E6D14126}
 		{872D2338-E943-4D44-97D6-01EDFCDEBFD4} = {C97D2B16-BBAC-41AA-9709-4358E6D14126}
+		{FBB955BD-4617-44DD-8D9E-F699783883AC} = {C97D2B16-BBAC-41AA-9709-4358E6D14126}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CADC909A-51C7-4D09-A15C-52449D2E42C1}
