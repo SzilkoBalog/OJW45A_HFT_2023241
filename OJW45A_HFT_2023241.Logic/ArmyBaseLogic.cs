@@ -1,12 +1,14 @@
-﻿using OJW45A_HFT_2023241.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OJW45A_HFT_2023241.Models;
 using OJW45A_HFT_2023241.Repository;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OJW45A_HFT_2023241.Logic
 {
-    public class ArmyBaseLogic
+    public class ArmyBaseLogic : IArmyBaseLogic
     {
 
         IRepository<ArmyBase> repository;
@@ -18,7 +20,7 @@ namespace OJW45A_HFT_2023241.Logic
 
         public void Create(ArmyBase item)
         {
-            if (item.Name == null || item.Name.Length>50 || item.DateOfBuild == DateTime.MinValue || item.NumberOfBeds == 0)//Checks if the values are eligible
+            if (item.Name == null || item.Name.Length > 50 || item.DateOfBuild == DateTime.MinValue || item.NumberOfBeds == 0)//Checks if the values are eligible
             {
                 throw new ArgumentException("Wrong name || name length || dateofbuild || numberofbeds");
             }
@@ -44,7 +46,7 @@ namespace OJW45A_HFT_2023241.Logic
             return armybase;
         }
 
-        public IQueryable<ArmyBase> ReadAll()
+        public IEnumerable<ArmyBase> ReadAll()
         {
             return repository.ReadAll();//No check needed, if there is no data an empty IQueryable will be returned
         }
@@ -54,29 +56,47 @@ namespace OJW45A_HFT_2023241.Logic
             repository.Update(item);//No need for checks, if item does not exist, there will be no changes done
         }
 
-        public IEnumerable LogicMetodus1(ArmyBase item)
+        public IEnumerable<KeyValuePair<ArmyBase, double>> GetBasesWithAverageSoldierAge()
         {
-            throw new NotImplementedException();
+            return repository.ReadAll()
+                .Select(b => new KeyValuePair<ArmyBase, double>
+                (b, b.Soldiers.Average(s => s.Age)))
+                .ToList();
         }
 
-        public IEnumerable LogicMetodus2(ArmyBase item)
+        public IEnumerable<ArmyBaseData> GetArmyBaseStatistics()
         {
-            throw new NotImplementedException();
+            return repository.ReadAll()
+                .Select(b => new ArmyBaseData
+                {
+                    BaseName = b.Name,
+                    Count = b.Soldiers.Count(),
+                    AvgWeight = (int)b.Soldiers.Average(s => s.Weight),
+                    AvgAge = (int)b.Soldiers.Average(s => s.Age)
+                })
+                .ToList();
         }
 
-        public IEnumerable LogicMetodus3(ArmyBase item)
+        public IEnumerable<KeyValuePair<string, int>> GetEquipmentCountByTypePerBase()
         {
-            throw new NotImplementedException();
+            return repository.ReadAll()
+                .Select(b => new KeyValuePair<string, int>
+                ($"BaseId:{b.Id}",
+                    b.Soldiers
+                        .SelectMany(s => s.Equipment)
+                        .GroupBy(e => e.Type)
+                        .ToDictionary(g => g.Key, g => g.Count())
+                        .Sum(kv => kv.Value)
+                ))
+                .ToList();
         }
 
-        public IEnumerable LogicMetodus4(ArmyBase item)
+        public class ArmyBaseData
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus5(ArmyBase item)
-        {
-            throw new NotImplementedException();
+            public string BaseName { get; set; }
+            public int Count { get; set; }
+            public int AvgWeight { get; set; }
+            public int AvgAge { get; set; }
         }
     }
 }

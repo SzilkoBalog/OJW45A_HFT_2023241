@@ -1,12 +1,14 @@
-﻿using OJW45A_HFT_2023241.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OJW45A_HFT_2023241.Models;
 using OJW45A_HFT_2023241.Repository;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OJW45A_HFT_2023241.Logic
 {
-    public class SoldierLogic
+    public class SoldierLogic : ISoldierLogic
     {
         IRepository<Soldier> repository;
 
@@ -43,7 +45,7 @@ namespace OJW45A_HFT_2023241.Logic
             return soldier;
         }
 
-        public IQueryable<Soldier> ReadAll()
+        public IEnumerable<Soldier> ReadAll()
         {
             return repository.ReadAll();//No check needed, if there is no data an empty IQueryable will be returned
         }
@@ -53,29 +55,20 @@ namespace OJW45A_HFT_2023241.Logic
             repository.Update(item);//No need for checks, if item does not exist, there will be no changes done
         }
 
-        public IEnumerable LogicMetodus1(Soldier item)
+        public IEnumerable<KeyValuePair<Soldier, IEnumerable<string>>> GetSoldiersWithEquipmentTypes()
         {
-            throw new NotImplementedException();
+            return repository.ReadAll()
+                .Select(s => new KeyValuePair<Soldier, IEnumerable<string>>
+                (s, s.Equipment.Select(e => e.Type)))
+                .ToList();
         }
 
-        public IEnumerable LogicMetodus2(Soldier item)
+        public IEnumerable<KeyValuePair<Soldier, int>> GetSoldiersWithTotalEquipmentWeight()
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus3(Soldier item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus4(Soldier item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus5(Soldier item)
-        {
-            throw new NotImplementedException();
+            return repository.ReadAll()
+                .Select(s => new KeyValuePair<Soldier, int>
+                (s, s.Equipment.Sum(e => e.Weight)))
+                .ToList();
         }
     }
 }

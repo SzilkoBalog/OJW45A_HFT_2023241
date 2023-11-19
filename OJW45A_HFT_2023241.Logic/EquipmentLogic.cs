@@ -2,11 +2,12 @@
 using OJW45A_HFT_2023241.Repository;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OJW45A_HFT_2023241.Logic
 {
-    public class EquipmentLogic
+    public class EquipmentLogic : IEquipmentLogic
     {
         IRepository<Equipment> repository;
 
@@ -43,7 +44,7 @@ namespace OJW45A_HFT_2023241.Logic
             return equipment;
         }
 
-        public IQueryable<Equipment> ReadAll()
+        public IEnumerable<Equipment> ReadAll()
         {
             return repository.ReadAll();//No check needed, if there is no data an empty IQueryable will be returned
         }
@@ -51,31 +52,6 @@ namespace OJW45A_HFT_2023241.Logic
         public void Update(Equipment item)
         {
             repository.Update(item);//No need for checks, if item does not exist, there will be no changes done
-        }
-
-        public IEnumerable LogicMetodus1(Equipment item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus2(Equipment item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus3(Equipment item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus4(Equipment item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable LogicMetodus5(Equipment item)
-        {
-            throw new NotImplementedException();
         }
     }
 }
