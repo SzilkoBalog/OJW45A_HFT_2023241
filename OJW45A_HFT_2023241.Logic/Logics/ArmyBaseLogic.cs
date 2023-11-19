@@ -78,16 +78,15 @@ namespace OJW45A_HFT_2023241.Logic.Logics
                 .ToList();
         }
 
-        public IEnumerable<KeyValuePair<string, int>> GetEquipmentCountByTypePerBase()
+        public IEnumerable<KeyValuePair<string, Dictionary<string, int>>> GetEquipmentCountByTypePerBase()
         {
             return repository.ReadAll()
-                .Select(b => new KeyValuePair<string, int>
-                ($"BaseId:{b.Id}",
+                .Select(b => new KeyValuePair<string, Dictionary<string, int>>(
+                    $"BaseId:{b.Id}",
                     b.Soldiers
                         .SelectMany(s => s.Equipment)
                         .GroupBy(e => e.Type)
                         .ToDictionary(g => g.Key, g => g.Count())
-                        .Sum(kv => kv.Value)
                 ))
                 .ToList();
         }
@@ -98,6 +97,20 @@ namespace OJW45A_HFT_2023241.Logic.Logics
             public int Count { get; set; }
             public int AvgWeight { get; set; }
             public int AvgAge { get; set; }
+
+            public override bool Equals(object obj)
+            {
+                return obj is ArmyBaseData data &&
+                       BaseName == data.BaseName &&
+                       Count == data.Count &&
+                       AvgWeight == data.AvgWeight &&
+                       AvgAge == data.AvgAge;
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(BaseName, Count, AvgWeight, AvgAge);
+            }
         }
     }
 }
