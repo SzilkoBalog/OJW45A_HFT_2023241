@@ -18,9 +18,9 @@ namespace OJW45A_HFT_2023241.Logic
 
         public void Create(Equipment item)
         {
-            if (item.Type == null || item.Type.Length > 50 || item.Description.Length > 200 || item.SoldierId == 0)//Checks if the values are eligible
+            if (item.Type == null || item.Type.Length > 50 || item.Description?.Length > 200 || item.SoldierId == 0)//Checks if the values are eligible
             {
-                throw new ArgumentException("Wrong name || name length || description length || soldierid");
+                throw new ArgumentException("Wrong type || type length || description length || soldierid");
             }
             repository.Create(item);
         }
