@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using OJW45A_HFT_2023241.Logic.LogicInterfaces;
 using OJW45A_HFT_2023241.Logic.Logics;
 using OJW45A_HFT_2023241.Models;
@@ -11,103 +12,27 @@ using System.Threading.Tasks;
 
 namespace OJW45A_HFT_2023241.Test
 {
-    public class FakeArmyBaseRepository : IRepository<ArmyBase>
-    {
-        public void Create(ArmyBase item)
-        { 
-            //Has been deleted to simulate correct data received
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ArmyBase Read(int id)
-        {
-            return null;
-        }
-
-        public IQueryable<ArmyBase> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(ArmyBase item)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class FakeSoldierRepository : IRepository<Soldier>
-    {
-        public void Create(Soldier item)
-        {
-            //Has been deleted to simulate correct data received
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Soldier Read(int id)
-        {
-            return null;
-        }
-
-        public IQueryable<Soldier> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Soldier item)
-        {
-            throw new NotImplementedException();
-        }
-    }   
-
-    public class FakeEquipmentRepository : IRepository<Equipment>
-    {
-        public void Create(Equipment item)
-        {
-            //Has been deleted to simulate correct data received
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Equipment Read(int id)
-        {
-            return null;
-        }
-
-        public IQueryable<Equipment> ReadAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Equipment item)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     [TestFixture]
     public class CrudTests
     {
-        IArmyBaseLogic armyBaseLogic;
-        ISoldierLogic soldierLogic;
-        IEquipmentLogic equipmentLogic;
+        ArmyBaseLogic armyBaseLogic;
+        SoldierLogic soldierLogic;
+        EquipmentLogic equipmentLogic;
+
+        Mock<IRepository<ArmyBase>> mockArmyBaseRepository;
+        Mock<IRepository<Soldier>> mockSoldierRepository;
+        Mock<IRepository<Equipment>> mockEquipmentRepository;
 
         [SetUp]
         public void SetUp()
         {
-            armyBaseLogic = new ArmyBaseLogic(new FakeArmyBaseRepository());
-            soldierLogic = new SoldierLogic(new FakeSoldierRepository());
-            equipmentLogic = new EquipmentLogic(new FakeEquipmentRepository());
+            mockArmyBaseRepository = new Mock<IRepository<ArmyBase>>();
+            mockSoldierRepository = new Mock<IRepository<Soldier>>();
+            mockEquipmentRepository = new Mock<IRepository<Equipment>>();
+
+            armyBaseLogic = new ArmyBaseLogic(mockArmyBaseRepository.Object);
+            soldierLogic = new SoldierLogic(mockSoldierRepository.Object);
+            equipmentLogic = new EquipmentLogic(mockEquipmentRepository.Object);
         }
 
         //Only testing the exceptions of these crud methods
@@ -143,13 +68,12 @@ namespace OJW45A_HFT_2023241.Test
         [Test]
         public void ArmyBaseCreateTest5()
         {
-            //In this example all should be correct, no exception should be thrown
-            Assert.That(() => armyBaseLogic.Create(new ArmyBase
-            {
-                Name = "AllCorrect",
-                NumberOfBeds = 10,
-                DateOfBuild = new DateTime(2002, 10, 10)
-            }), Throws.Nothing);
+            //In this example, all should be correct, no exception should be thrown
+            var test = new ArmyBase { Name = "AllCorrect", NumberOfBeds = 10, DateOfBuild = new DateTime(2002, 10, 10) };
+
+            armyBaseLogic.Create(test);
+
+            mockArmyBaseRepository.Verify(x => x.Create(test), Times.Once);
         }
 
 
@@ -185,12 +109,11 @@ namespace OJW45A_HFT_2023241.Test
         public void SoldierCreateTest5()
         {
             //In this example, all should be correct, no exception should be thrown
-            Assert.That(() => soldierLogic.Create(new Soldier 
-            { 
-                Name = "AllCorrecr", 
-                Age = 18, 
-                ArmyBaseId = 1 
-            }), Throws.Nothing);
+            var test = new Soldier { Name = "AllCorrecr", Age = 18, ArmyBaseId = 1 };
+
+            soldierLogic.Create(test);
+
+            mockSoldierRepository.Verify(x => x.Create(test), Times.Once);
         }
 
 
@@ -226,12 +149,11 @@ namespace OJW45A_HFT_2023241.Test
         public void EquipmentCreateTest5()
         {
             //In this example, all should be correct, no exception should be thrown
-            Assert.That(() => equipmentLogic.Create(new Equipment 
-            { 
-                Type = "AllCorrect", 
-                Weight = 100,
-                SoldierId = 1
-            }), Throws.Nothing);
+            var test = new Equipment{Type = "AllCorrect", Weight = 100, SoldierId = 1 };
+
+            equipmentLogic.Create(test);
+
+            mockEquipmentRepository.Verify(x => x.Create(test), Times.Once);
         }
 
 
