@@ -112,13 +112,57 @@ namespace OJW45A_HFT_2023241.Client
         {
             if (entity == "ArmyBase")
             {
-                Console.Write("Enter ArmyBase id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                ArmyBase one = rest.Get<ArmyBase>(id, "armybase");
-                Console.Write($"New name [old: {one.Name}]: ");
-                string name = Console.ReadLine();
-                one.Name = name;
-                rest.Put(one, "armybase");
+                try
+                {
+                    Console.Write("Enter ArmyBase id to update: ");
+                    int id = int.Parse(Console.ReadLine());
+                    ArmyBase one = rest.Get<ArmyBase>(id, "armybase");
+                    Console.Write($"New name [old: {one.Name}]: ");
+                    string name = Console.ReadLine();
+                    one.Name = name;
+                    rest.Put(one, "armybase");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }              
+            }
+            else if (entity == "Soldier")
+            {
+                try
+                {
+                    Console.Write("Enter Soldier id to update: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Soldier one = rest.Get<Soldier>(id, "soldier");
+                    Console.Write($"New name [old: {one.Name}]: ");
+                    string name = Console.ReadLine();
+                    one.Name = name;
+                    rest.Put(one, "soldier");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }              
+            }
+            else if (entity == "Equipment")
+            {
+                try
+                {
+                    Console.Write("Enter Equipment id to update: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Equipment one = rest.Get<Equipment>(id, "equipment");
+                    Console.Write($"New type [old: {one.Type}]: ");
+                    string name = Console.ReadLine();
+                    one.Type = name;
+                    rest.Put(one, "equipment");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }             
             }
         }
         static void Delete(string entity)
