@@ -230,22 +230,22 @@ namespace OJW45A_HFT_2023241.Client
                     Console.ReadLine();
                 }
             }
-            //else if (variable == "GetArmyBaseStatistics")
-            //{
-            //    try
-            //    {
-            //        List<ArmyBaseData> bases = rest.Get<ArmyBaseData>("noncrud/GetArmyBaseStatistics");
-            //        foreach (var item in bases)
-            //        {
-            //            Console.WriteLine(item.Name + "\tNumber of soldiers: " + item.NumberOfSoldiers + "\tNumber of equipment: " + item.NumberOfEquipment);
-            //        }
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        Console.WriteLine(e.Message);
-            //        Console.ReadLine();
-            //    }
-            //}
+            else if (variable == "GetArmyBaseStatistics")
+            {
+                try
+                {
+                    List<ArmyBaseData> bases = rest.Get<ArmyBaseData>("noncrud/GetArmyBaseStatistics");
+                    foreach (var item in bases)
+                    {
+                        Console.WriteLine(item.BaseName + "\tNumber of soldiers: " + item.Count + "\tAverage weight: " + item.AvgWeight + "Average age" + item.AvgAge);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
             else if (variable == "GetEquipmentCountByTypePerBase")
             {
                 try
@@ -286,13 +286,22 @@ namespace OJW45A_HFT_2023241.Client
                     Console.ReadLine();
                 }
             }
-            //else if (variable == "GetSoldiersWithTotalEquipmentWeight")
-            //{
-            //    try
-            //    {
-            //        List<KeyValuePair<Soldier
-            //    }
-            //}
+            else if (variable == "GetSoldiersWithTotalEquipmentWeight")
+            {
+                try
+                {
+                    List<KeyValuePair<Soldier, int>> bases = rest.Get<KeyValuePair<Soldier, int>>("noncrud/GetSoldiersWithTotalEquipmentWeight");
+                    foreach (var item in bases)
+                    {
+                        Console.WriteLine(item.Key.Name + "\tTotal weight: " + item.Value);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
             Console.ReadLine();
         }
         static void Main(string[] args)

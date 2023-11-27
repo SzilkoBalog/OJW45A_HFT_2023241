@@ -2,7 +2,6 @@
 using OJW45A_HFT_2023241.Logic.LogicInterfaces;
 using OJW45A_HFT_2023241.Models;
 using System.Collections.Generic;
-using static OJW45A_HFT_2023241.Logic.Logics.ArmyBaseLogic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
