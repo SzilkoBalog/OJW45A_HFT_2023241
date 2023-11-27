@@ -59,7 +59,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
 
         public IEnumerable<KeyValuePair<ArmyBase, double>> GetBasesWithAverageSoldierAge()
         {
-            return repository.ReadAll()
+            return repository.ReadAll().ToList()
                 .Select(b => new KeyValuePair<ArmyBase, double>
                 (b, b.Soldiers.Average(s => s.Age)))
                 .ToList();
@@ -67,7 +67,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
 
         public IEnumerable<ArmyBaseData> GetArmyBaseStatistics()
         {
-            return repository.ReadAll()
+            return repository.ReadAll().ToList()
                 .Select(b => new ArmyBaseData
                 {
                     BaseName = b.Name,
@@ -80,7 +80,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
 
         public IEnumerable<KeyValuePair<string, Dictionary<string, int>>> GetEquipmentCountByTypePerBase()
         {
-            return repository.ReadAll()
+            return repository.ReadAll().ToList()
                 .Select(b => new KeyValuePair<string, Dictionary<string, int>>(
                     $"BaseId:{b.Id}",
                     b.Soldiers

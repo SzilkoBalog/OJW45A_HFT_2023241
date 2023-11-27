@@ -58,7 +58,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
 
         public IEnumerable<KeyValuePair<Soldier, IEnumerable<string>>> GetSoldiersWithEquipmentTypes()
         {
-            return repository.ReadAll()
+            return repository.ReadAll().ToList()
                 .Select(s => new KeyValuePair<Soldier, IEnumerable<string>>
                 (s, s.Equipment.Select(e => e.Type)))
                 .ToList();
@@ -66,7 +66,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
 
         public IEnumerable<KeyValuePair<Soldier, int>> GetSoldiersWithTotalEquipmentWeight()
         {
-            return repository.ReadAll()
+            return repository.ReadAll().ToList()
                 .Select(s => new KeyValuePair<Soldier, int>
                 (s, s.Equipment.Sum(e => e.Weight)))
                 .ToList();

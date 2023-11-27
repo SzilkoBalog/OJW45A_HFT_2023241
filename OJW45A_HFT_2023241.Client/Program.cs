@@ -212,6 +212,89 @@ namespace OJW45A_HFT_2023241.Client
                 }
             }
         }
+        static void NonCrud(string variable)
+        {
+            if (variable == "GetBasesWithAverageSoldierAge")
+            {
+                try
+                {
+                    List<KeyValuePair<ArmyBase, double>> bases = rest.Get<KeyValuePair<ArmyBase, double>>("NonCrud/GetBasesWithAverageSoldierAge");
+                    foreach (var item in bases)
+                    {
+                        Console.WriteLine(item.Key.Name + "\tAverage age: " + item.Value);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
+            //else if (variable == "GetArmyBaseStatistics")
+            //{
+            //    try
+            //    {
+            //        List<ArmyBaseData> bases = rest.Get<ArmyBaseData>("noncrud/GetArmyBaseStatistics");
+            //        foreach (var item in bases)
+            //        {
+            //            Console.WriteLine(item.Name + "\tNumber of soldiers: " + item.NumberOfSoldiers + "\tNumber of equipment: " + item.NumberOfEquipment);
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine(e.Message);
+            //        Console.ReadLine();
+            //    }
+            //}
+            else if (variable == "GetEquipmentCountByTypePerBase")
+            {
+                try
+                {
+                    List<KeyValuePair<string, Dictionary<string, int>>> bases = rest.Get<KeyValuePair<string, Dictionary<string, int>>>("noncrud/GetEquipmentCountByTypePerBase");
+                    foreach (var item in bases)
+                    {
+                        Console.WriteLine(item.Key);
+                        foreach (var item2 in item.Value)
+                        {
+                            Console.WriteLine("\t" + item2.Key + ": " + item2.Value);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
+            else if (variable == "GetSoldiersWithEquipmentTypes")
+            {
+                try
+                {
+                    List<KeyValuePair<Soldier, IEnumerable<string>>> bases = rest.Get<KeyValuePair<Soldier, IEnumerable<string>>>("noncrud/GetSoldiersWithEquipmentTypes");
+                    foreach (var item in bases)
+                    {
+                        Console.WriteLine(item.Key.Name);
+                        foreach (var item2 in item.Value)
+                        {
+                            Console.WriteLine("\t" + item2);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+            }
+            //else if (variable == "GetSoldiersWithTotalEquipmentWeight")
+            //{
+            //    try
+            //    {
+            //        List<KeyValuePair<Soldier
+            //    }
+            //}
+            Console.ReadLine();
+        }
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:36154/", "armybase");
@@ -238,11 +321,11 @@ namespace OJW45A_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var noncrudSubMenu = new ConsoleMenu(args, level: 1)
-                //Write the methods used with the correct parameters
-                //.Add("List", () => List("Equipment"))
-                //.Add("Create", () => Create("Equipment"))
-                //.Add("Delete", () => Delete("Equipment"))
-                //.Add("Update", () => Update("Equipment"))
+                .Add("GetBasesWithAverageSoldierAge", () => NonCrud("GetBasesWithAverageSoldierAge"))
+                .Add("GetArmyBaseStatistics", () => NonCrud("GetArmyBaseStatistics"))
+                .Add("GetEquipmentCountByTypePerBase", () => NonCrud("GetEquipmentCountByTypePerBase"))
+                .Add("GetSoldiersWithEquipmentTypes", () => NonCrud("GetSoldiersWithEquipmentTypes"))
+                .Add("GetSoldiersWithTotalEquipmentWeight", () => NonCrud("GetSoldiersWithTotalEquipmentWeight"))
                 .Add("Exit", ConsoleMenu.Close);
 
             var menu = new ConsoleMenu(args, level: 0)
