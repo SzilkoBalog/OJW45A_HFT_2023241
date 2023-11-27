@@ -237,11 +237,19 @@ namespace OJW45A_HFT_2023241.Client
                 .Add("Update", () => Update("Equipment"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var noncrudSubMenu = new ConsoleMenu(args, level: 1)
+                //Write the methods used with the correct parameters
+                //.Add("List", () => List("Equipment"))
+                //.Add("Create", () => Create("Equipment"))
+                //.Add("Delete", () => Delete("Equipment"))
+                //.Add("Update", () => Update("Equipment"))
+                .Add("Exit", ConsoleMenu.Close);
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Bases", () => baseSubMenu.Show())
                 .Add("Soldiers", () => soldierSubMenu.Show())
                 .Add("Equipment", () => equipmentSubMenu.Show())
+                .Add("Non-Crud", () => noncrudSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();
