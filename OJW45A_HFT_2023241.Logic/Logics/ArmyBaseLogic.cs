@@ -60,6 +60,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
         public IEnumerable<KeyValuePair<ArmyBase, double>> GetBasesWithAverageSoldierAge()
         {
             return repository.ReadAll().ToList()
+                .Where(b => b.Soldiers.Count() > 0)
                 .Select(b => new KeyValuePair<ArmyBase, double>
                 (b, b.Soldiers.Average(s => s.Age)))
                 .ToList();
@@ -68,6 +69,7 @@ namespace OJW45A_HFT_2023241.Logic.Logics
         public IEnumerable<ArmyBaseData> GetArmyBaseStatistics()
         {
             return repository.ReadAll().ToList()
+                .Where(b => b.Soldiers.Count() > 0)
                 .Select(b => new ArmyBaseData
                 {
                     BaseName = b.Name,
@@ -89,28 +91,6 @@ namespace OJW45A_HFT_2023241.Logic.Logics
                         .ToDictionary(g => g.Key, g => g.Count())
                 ))
                 .ToList();
-        }
-
-        public class ArmyBaseData
-        {
-            public string BaseName { get; set; }
-            public int Count { get; set; }
-            public int AvgWeight { get; set; }
-            public int AvgAge { get; set; }
-
-            public override bool Equals(object obj)
-            {
-                return obj is ArmyBaseData data &&
-                       BaseName == data.BaseName &&
-                       Count == data.Count &&
-                       AvgWeight == data.AvgWeight &&
-                       AvgAge == data.AvgAge;
-            }
-
-            public override int GetHashCode()
-            {
-                return HashCode.Combine(BaseName, Count, AvgWeight, AvgAge);
-            }
         }
     }
 }
