@@ -237,7 +237,7 @@ namespace OJW45A_HFT_2023241.Client
                     List<ArmyBaseData> bases = rest.Get<ArmyBaseData>("noncrud/GetArmyBaseStatistics");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.BaseName + "\tNumber of soldiers: " + item.Count + "\tAverage weight: " + item.AvgWeight + "\tAverage age" + item.AvgAge);
+                        Console.WriteLine(item.BaseName + "\tNumber of soldiers: " + item.Count + "\tAverage weight: " + item.AvgWeight + "\tAverage age: " + item.AvgAge);
                     }
                 }
                 catch (Exception e)
