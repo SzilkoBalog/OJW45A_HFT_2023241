@@ -80,6 +80,59 @@ namespace OJW45A_HFT_2023241.Client
                 }
             }
         }
+
+        static void GetOne(string entity)
+        {           
+            if (entity == "ArmyBase")
+            {
+                Console.WriteLine("Enter ArmyBase id: ");
+                try
+                {                
+                    int id = int.Parse(Console.ReadLine());
+                    ArmyBase armyBase = rest.Get<ArmyBase>(id, "armybase");
+                    Console.WriteLine(armyBase.Id + ": " + armyBase.Name + "\tDate of build: " + armyBase.DateOfBuild);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                    return;
+                }               
+            }
+            else if (entity == "Soldier")
+            {
+                Console.WriteLine("Enter Soldier id: ");
+                try
+                {
+                    int id = int.Parse(Console.ReadLine());
+                    Soldier soldier = rest.Get<Soldier>(id, "soldier");
+                    Console.WriteLine(soldier.Id + ": " + soldier.Name + "\tAge: " + soldier.Age);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                    return;
+                }
+            }
+            else if (entity == "Equipment")
+            {
+                Console.WriteLine("Enter Equipment id: ");
+                try
+                {
+                    int id = int.Parse(Console.ReadLine());
+                    Equipment equipment = rest.Get<Equipment>(id, "equipment");
+                    Console.WriteLine(equipment.Id + ": " + equipment.Type + "\tWeight: " + equipment.Weight);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                    return;
+                }
+            }
+            Console.ReadLine();
+        }
         static void List(string entity)
         {
             if (entity == "ArmyBase")
@@ -309,6 +362,7 @@ namespace OJW45A_HFT_2023241.Client
             rest = new RestService("http://localhost:36154/", "armybase");
 
             var baseSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Get Base", () => GetOne("ArmyBase"))
                 .Add("List", () => List("ArmyBase"))
                 .Add("Create", () => Create("ArmyBase"))
                 .Add("Delete", () => Delete("ArmyBase"))
@@ -316,6 +370,7 @@ namespace OJW45A_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var soldierSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Get Soldier", () => GetOne("Soldier"))
                 .Add("List", () => List("Soldier"))
                 .Add("Create", () => Create("Soldier"))
                 .Add("Delete", () => Delete("Soldier"))
@@ -323,6 +378,7 @@ namespace OJW45A_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var equipmentSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Get Equipment", () => GetOne("Equipment"))
                 .Add("List", () => List("Equipment"))
                 .Add("Create", () => Create("Equipment"))
                 .Add("Delete", () => Delete("Equipment"))
