@@ -274,7 +274,7 @@ namespace OJW45A_HFT_2023241.Client
                     List<GetBasesWithAverageSoldierAgeData> bases = rest.Get<GetBasesWithAverageSoldierAgeData>("NonCrud/GetBasesWithAverageSoldierAge");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.BaseName + "\tAverage age: " + item.AverageSoldierAge);
+                        Console.WriteLine($"Average age of soldiers in base ({item.BaseName}): {item.AverageSoldierAge}");
                     }
                 }
                 catch (Exception e)
@@ -322,7 +322,7 @@ namespace OJW45A_HFT_2023241.Client
                     List<KeyValuePair<Soldier, IEnumerable<string>>> bases = rest.Get<KeyValuePair<Soldier, IEnumerable<string>>>("noncrud/GetSoldiersWithEquipmentTypes");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.Key.Name);
+                        Console.WriteLine($"Equipment assigned to {item.Key.Name}:");
                         foreach (var item2 in item.Value)
                         {
                             Console.WriteLine("\t" + item2);
@@ -342,7 +342,7 @@ namespace OJW45A_HFT_2023241.Client
                     List<GetSoldiersWithTotalEquipmentWeightData> bases = rest.Get<GetSoldiersWithTotalEquipmentWeightData>("noncrud/GetSoldiersWithTotalEquipmentWeight");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.soldier.Name + "\tTotal weight: " + item.TotalEquipmentWeight);
+                        Console.WriteLine($"Total weight of equipment assigned to {item.soldier.Name}: {item.TotalEquipmentWeight}");
                     }
                 }
                 catch (Exception e)
