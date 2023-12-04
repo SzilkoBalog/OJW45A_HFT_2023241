@@ -339,10 +339,10 @@ namespace OJW45A_HFT_2023241.Client
             {
                 try
                 {
-                    List<KeyValuePair<Soldier, int>> bases = rest.Get<KeyValuePair<Soldier, int>>("noncrud/GetSoldiersWithTotalEquipmentWeight");
+                    List<GetSoldiersWithTotalEquipmentWeightData> bases = rest.Get<GetSoldiersWithTotalEquipmentWeightData>("noncrud/GetSoldiersWithTotalEquipmentWeight");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.Key.Name + "\tTotal weight: " + item.Value);
+                        Console.WriteLine(item.soldier.Name + "\tTotal weight: " + item.TotalEquipmentWeight);
                     }
                 }
                 catch (Exception e)

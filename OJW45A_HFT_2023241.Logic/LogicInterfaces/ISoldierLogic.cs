@@ -12,6 +12,6 @@ namespace OJW45A_HFT_2023241.Logic.LogicInterfaces
         void Update(Soldier item);
 
         IEnumerable<KeyValuePair<Soldier, IEnumerable<string>>> GetSoldiersWithEquipmentTypes();
-        IEnumerable<KeyValuePair<Soldier, int>> GetSoldiersWithTotalEquipmentWeight();
+        IEnumerable<GetSoldiersWithTotalEquipmentWeightData> GetSoldiersWithTotalEquipmentWeight();
     }
 }

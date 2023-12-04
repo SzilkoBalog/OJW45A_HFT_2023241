@@ -45,7 +45,7 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<KeyValuePair<Soldier, int>> GetSoldiersWithTotalEquipmentWeight()
+        public IEnumerable<GetSoldiersWithTotalEquipmentWeightData> GetSoldiersWithTotalEquipmentWeight()
         {
             return this.sodlierLogic.GetSoldiersWithTotalEquipmentWeight();
         }
