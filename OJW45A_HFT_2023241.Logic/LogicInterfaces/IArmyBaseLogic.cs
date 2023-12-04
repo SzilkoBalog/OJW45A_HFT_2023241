@@ -11,7 +11,7 @@ namespace OJW45A_HFT_2023241.Logic.LogicInterfaces
         ArmyBase Read(int id);
         IEnumerable<ArmyBase> ReadAll();
         void Update(ArmyBase item);
-        IEnumerable<ArmyBaseData> GetArmyBaseStatistics();
+        IEnumerable<GetArmyBaseStatisticsData> GetArmyBaseStatistics();
         IEnumerable<GetBasesWithAverageSoldierAgeData> GetBasesWithAverageSoldierAge();
         IEnumerable<GetEquipmentCountByTypePerBaseData> GetEquipmentCountByTypePerBase();
     }

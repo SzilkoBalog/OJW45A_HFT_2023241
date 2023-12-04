@@ -68,11 +68,11 @@ namespace OJW45A_HFT_2023241.Logic.Logics
                 });
         }
 
-        public IEnumerable<ArmyBaseData> GetArmyBaseStatistics()
+        public IEnumerable<GetArmyBaseStatisticsData> GetArmyBaseStatistics()
         {
             return repository.ReadAll()
                 .Where(b => b.Soldiers.Count() > 0)
-                .Select(b => new ArmyBaseData
+                .Select(b => new GetArmyBaseStatisticsData
                 {
                     BaseName = b.Name,
                     Count = b.Soldiers.Count(),

@@ -27,7 +27,7 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ArmyBaseData> GetArmyBaseStatistics()
+        public IEnumerable<GetArmyBaseStatisticsData> GetArmyBaseStatistics()
         {
             return this.armyLogic.GetArmyBaseStatistics();
         }

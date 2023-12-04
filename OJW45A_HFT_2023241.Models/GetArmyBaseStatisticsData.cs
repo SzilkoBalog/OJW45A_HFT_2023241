@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OJW45A_HFT_2023241.Models
 {
-    public class ArmyBaseData
+    public class GetArmyBaseStatisticsData
     {
         public string BaseName { get; set; }
         public int Count { get; set; }
@@ -15,7 +15,7 @@ namespace OJW45A_HFT_2023241.Models
 
         public override bool Equals(object obj)
         {
-            return obj is ArmyBaseData data &&
+            return obj is GetArmyBaseStatisticsData data &&
                    BaseName == data.BaseName &&
                    Count == data.Count &&
                    AvgWeight == data.AvgWeight &&

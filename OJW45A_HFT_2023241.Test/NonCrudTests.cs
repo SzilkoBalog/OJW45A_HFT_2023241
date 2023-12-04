@@ -149,37 +149,37 @@ namespace OJW45A_HFT_2023241.Test
             // Assert
             Assert.IsNotNull(result);
 
-            var expectedResult = new List<ArmyBaseData>
+            var expectedResult = new List<GetArmyBaseStatisticsData>
         {
-            new ArmyBaseData
+            new GetArmyBaseStatisticsData
             {
                 BaseName = "TestBase1",
                 Count = 2,
                 AvgWeight = 90,
                 AvgAge = 31
             },
-            new ArmyBaseData
+            new GetArmyBaseStatisticsData
             {
                 BaseName = "TestBase2",
                 Count = 2,
                 AvgWeight = 100,
                 AvgAge = 30
             },
-            new ArmyBaseData
+            new GetArmyBaseStatisticsData
             {
                 BaseName = "TestBase3",
                 Count = 2,
                 AvgWeight = 62,
                 AvgAge = 50
             },
-            new ArmyBaseData
+            new GetArmyBaseStatisticsData
             {
                 BaseName = "TestBase4",
                 Count = 2,
                 AvgWeight = 120,
                 AvgAge = 0
             },
-            new ArmyBaseData
+            new GetArmyBaseStatisticsData
             {
                 BaseName = "TestBase5",
                 Count = 2,

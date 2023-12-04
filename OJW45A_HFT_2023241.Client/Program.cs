@@ -287,7 +287,7 @@ namespace OJW45A_HFT_2023241.Client
             {
                 try
                 {
-                    List<ArmyBaseData> bases = rest.Get<ArmyBaseData>("noncrud/GetArmyBaseStatistics");
+                    List<GetArmyBaseStatisticsData> bases = rest.Get<GetArmyBaseStatisticsData>("noncrud/GetArmyBaseStatistics");
                     foreach (var item in bases)
                     {
                         Console.WriteLine(item.BaseName + "\tNumber of soldiers: " + item.Count + "\tAverage weight: " + item.AvgWeight + "\tAverage age: " + item.AvgAge);
@@ -306,7 +306,7 @@ namespace OJW45A_HFT_2023241.Client
                     List<GetEquipmentCountByTypePerBaseData> bases = rest.Get<GetEquipmentCountByTypePerBaseData>("noncrud/GetEquipmentCountByTypePerBase");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.BaseName + "\tEquipment Type: " + item.EquipmentType + "\tEquipment Count: " + item.EquipmentCount);
+                        Console.WriteLine(item.BaseName + "\tEquipmentType: " + item.EquipmentType + "\tEquipmentCount: " + item.EquipmentCount);
                     }
                 }
                 catch (Exception e)
