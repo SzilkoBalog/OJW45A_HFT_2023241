@@ -21,7 +21,7 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<KeyValuePair<ArmyBase, double>> GetBasesWithAverageSoldierAge()
+        public IEnumerable<GetBasesWithAverageSoldierAgeData> GetBasesWithAverageSoldierAge()
         {
             return this.armyLogic.GetBasesWithAverageSoldierAge();
         }
@@ -33,7 +33,7 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<KeyValuePair<string, Dictionary<string, int>>> GetEquipmentCountByTypePerBase()
+        public IEnumerable<GetEquipmentCountByTypePerBaseData> GetEquipmentCountByTypePerBase()
         {
             return this.armyLogic.GetEquipmentCountByTypePerBase();
         }

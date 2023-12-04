@@ -12,7 +12,7 @@ namespace OJW45A_HFT_2023241.Logic.LogicInterfaces
         IEnumerable<ArmyBase> ReadAll();
         void Update(ArmyBase item);
         IEnumerable<ArmyBaseData> GetArmyBaseStatistics();
-        IEnumerable<KeyValuePair<ArmyBase, double>> GetBasesWithAverageSoldierAge();
-        IEnumerable<KeyValuePair<string, Dictionary<string, int>>> GetEquipmentCountByTypePerBase();
+        IEnumerable<GetBasesWithAverageSoldierAgeData> GetBasesWithAverageSoldierAge();
+        IEnumerable<GetEquipmentCountByTypePerBaseData> GetEquipmentCountByTypePerBase();
     }
 }

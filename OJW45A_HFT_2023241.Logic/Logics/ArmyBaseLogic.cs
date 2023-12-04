@@ -57,18 +57,20 @@ namespace OJW45A_HFT_2023241.Logic.Logics
             repository.Update(item);//No need for checks, if item does not exist, there will be no changes done
         }
 
-        public IEnumerable<KeyValuePair<ArmyBase, double>> GetBasesWithAverageSoldierAge()
+        public IEnumerable<GetBasesWithAverageSoldierAgeData> GetBasesWithAverageSoldierAge()
         {
-            return repository.ReadAll().ToList()
+            return repository.ReadAll()
                 .Where(b => b.Soldiers.Count() > 0)
-                .Select(b => new KeyValuePair<ArmyBase, double>
-                (b, b.Soldiers.Average(s => s.Age)))
-                .ToList();
+                .Select(b => new GetBasesWithAverageSoldierAgeData
+                {
+                    BaseName = b.Name, 
+                    AverageSoldierAge = b.Soldiers.Average(s => s.Age) 
+                });
         }
 
         public IEnumerable<ArmyBaseData> GetArmyBaseStatistics()
         {
-            return repository.ReadAll().ToList()
+            return repository.ReadAll()
                 .Where(b => b.Soldiers.Count() > 0)
                 .Select(b => new ArmyBaseData
                 {
@@ -76,21 +78,44 @@ namespace OJW45A_HFT_2023241.Logic.Logics
                     Count = b.Soldiers.Count(),
                     AvgWeight = (int)b.Soldiers.Average(s => s.Weight),
                     AvgAge = (int)b.Soldiers.Average(s => s.Age)
-                })
-                .ToList();
+                });
         }
 
-        public IEnumerable<KeyValuePair<string, Dictionary<string, int>>> GetEquipmentCountByTypePerBase()
+        public IEnumerable<GetEquipmentCountByTypePerBaseData> GetEquipmentCountByTypePerBase()
         {
-            return repository.ReadAll().ToList()
-                .Select(b => new KeyValuePair<string, Dictionary<string, int>>(
-                    $"BaseId:{b.Id}",
-                    b.Soldiers
-                        .SelectMany(s => s.Equipment)
-                        .GroupBy(e => e.Type)
-                        .ToDictionary(g => g.Key, g => g.Count())
-                ))
-                .ToList();
+            // Step 1: Get all bases from the repository
+            var bases = repository.ReadAll();
+
+            // Step 2: Project each base to a new anonymous type with base name and equipment
+            var baseAndEquipment = bases.Select(b => new
+            {
+                BaseName = b.Name,
+                Equipment = b.Soldiers.SelectMany(s => s.Equipment)
+            });
+
+            // Step 3: Flatten the structure to have one row per equipment type per base
+            var flatResult = baseAndEquipment.SelectMany(be => be.Equipment, (be, e) => new
+            {
+                be.BaseName,
+                EquipmentType = e.Type
+            });
+
+            // Step 4: Group by base name and equipment type, count occurrences
+            var groupedResult = flatResult.GroupBy(x => new { x.BaseName, x.EquipmentType })
+                                          .Select(g => new
+                                          {
+                                              g.Key.BaseName,
+                                              g.Key.EquipmentType,
+                                              EquipmentCount = g.Count()
+                                          });
+
+            // Step 5: Project the final result into the desired class
+            return groupedResult.Select(g => new GetEquipmentCountByTypePerBaseData
+            {
+                BaseName = g.BaseName,
+                EquipmentType = g.EquipmentType,
+                EquipmentCount = g.EquipmentCount
+            });
         }
     }
 }

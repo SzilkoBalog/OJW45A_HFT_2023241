@@ -271,10 +271,10 @@ namespace OJW45A_HFT_2023241.Client
             {
                 try
                 {
-                    List<KeyValuePair<ArmyBase, double>> bases = rest.Get<KeyValuePair<ArmyBase, double>>("NonCrud/GetBasesWithAverageSoldierAge");
+                    List<GetBasesWithAverageSoldierAgeData> bases = rest.Get<GetBasesWithAverageSoldierAgeData>("NonCrud/GetBasesWithAverageSoldierAge");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.Key.Name + "\tAverage age: " + item.Value);
+                        Console.WriteLine(item.BaseName + "\tAverage age: " + item.AverageSoldierAge);
                     }
                 }
                 catch (Exception e)
@@ -303,14 +303,10 @@ namespace OJW45A_HFT_2023241.Client
             {
                 try
                 {
-                    List<KeyValuePair<string, Dictionary<string, int>>> bases = rest.Get<KeyValuePair<string, Dictionary<string, int>>>("noncrud/GetEquipmentCountByTypePerBase");
+                    List<GetEquipmentCountByTypePerBaseData> bases = rest.Get<GetEquipmentCountByTypePerBaseData>("noncrud/GetEquipmentCountByTypePerBase");
                     foreach (var item in bases)
                     {
-                        Console.WriteLine(item.Key);
-                        foreach (var item2 in item.Value)
-                        {
-                            Console.WriteLine("\t" + item2.Key + ": " + item2.Value);
-                        }
+                        Console.WriteLine(item.BaseName + "\tEquipment Type: " + item.EquipmentType + "\tEquipment Count: " + item.EquipmentCount);
                     }
                 }
                 catch (Exception e)
