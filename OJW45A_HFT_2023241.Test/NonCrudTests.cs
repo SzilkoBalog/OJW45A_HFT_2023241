@@ -133,11 +133,34 @@ namespace OJW45A_HFT_2023241.Test
             Assert.IsNotNull(result);
             Assert.AreEqual(inputArmyBase.Count(), result.Count());
 
-            foreach (var kvp in result)
+            var expectedResult = new List<GetBasesWithAverageSoldierAgeData>
             {
-                var expectedAverageAge = kvp.Key.Soldiers.Average(s => s.Age);
-                Assert.AreEqual(expectedAverageAge, kvp.Value);
-            }
+                new GetBasesWithAverageSoldierAgeData
+                {
+                    BaseName = "TestBase1",
+                    AverageSoldierAge = 31
+                },
+                new GetBasesWithAverageSoldierAgeData
+                {
+                    BaseName = "TestBase2",
+                    AverageSoldierAge = 30
+                },
+                new GetBasesWithAverageSoldierAgeData
+                {
+                    BaseName = "TestBase3",
+                    AverageSoldierAge = 50
+                },
+                new GetBasesWithAverageSoldierAgeData
+                {
+                    BaseName = "TestBase4",
+                    AverageSoldierAge = 0
+                },
+                new GetBasesWithAverageSoldierAgeData
+                {
+                    BaseName = "TestBase5",
+                    AverageSoldierAge = 50
+                }
+            };
         }
 
         [Test]
@@ -200,25 +223,44 @@ namespace OJW45A_HFT_2023241.Test
             // Assert
             Assert.IsNotNull(result);
 
-            var expectedResult = new List<KeyValuePair<string, Dictionary<string, int>>>
+            var expectedResult = new List<GetEquipmentCountByTypePerBaseData>
         {
-            new KeyValuePair<string, Dictionary<string, int>>("BaseId:1", new Dictionary<string, int>
+            new GetEquipmentCountByTypePerBaseData
             {
-                { "TestType1", 6 },
-            }),
-            new KeyValuePair<string, Dictionary<string, int>>("BaseId:2", new Dictionary<string, int>
+            BaseName = "TestBase1",
+            EquipmentType = "TestType1",
+            EquipmentCount = 6
+            },
+            new GetEquipmentCountByTypePerBaseData
             {
-                { "TestType1", 2 },
-                { "TestType2", 2 },
-                { "TestType3", 2 }
-            }),
-            new KeyValuePair<string, Dictionary<string, int>>("BaseId:3", new Dictionary<string, int>
+            BaseName = "TestBase2",
+            EquipmentType = "TestType1",
+            EquipmentCount = 2
+            },
+            new GetEquipmentCountByTypePerBaseData
             {
-                { "TestType1", 3 },
-                { "TestType2", 3 },
-            }),
-            new KeyValuePair<string, Dictionary<string, int>>("BaseId:4", new Dictionary<string, int>{}),
-            new KeyValuePair<string, Dictionary<string, int>>("BaseId:5", new Dictionary<string, int>{})
+            BaseName = "TestBase2",
+            EquipmentType = "TestType2",
+            EquipmentCount = 2
+            },
+            new GetEquipmentCountByTypePerBaseData
+            {
+            BaseName = "TestBase2",
+            EquipmentType = "TestType3",
+            EquipmentCount = 2
+            },
+            new GetEquipmentCountByTypePerBaseData
+            {
+            BaseName = "TestBase3",
+            EquipmentType = "TestType1",
+            EquipmentCount = 3
+            },
+            new GetEquipmentCountByTypePerBaseData
+            {
+            BaseName = "TestBase3",
+            EquipmentType = "TestType2",
+            EquipmentCount = 3
+            }
         };
 
             CollectionAssert.AreEquivalent(expectedResult, result);
@@ -255,13 +297,33 @@ namespace OJW45A_HFT_2023241.Test
             // Assert
             Assert.IsNotNull(result);
 
-            var expectedResult = new List<KeyValuePair<Soldier, int>>
+            var expectedResult = new List<GetSoldiersWithTotalEquipmentWeightData>
         {
-            new KeyValuePair<Soldier, int>(inputSoldier.First(), 60),
-            new KeyValuePair<Soldier, int>(inputSoldier.Skip(1).First(), 30),
-            new KeyValuePair<Soldier, int>(inputSoldier.Skip(2).First(), 2),
-            new KeyValuePair<Soldier, int>(inputSoldier.Skip(3).First(), 5),
-            new KeyValuePair<Soldier, int>(inputSoldier.Skip(4).First(), 0)
+                new GetSoldiersWithTotalEquipmentWeightData
+                {
+                    soldier = inputSoldier.First(),
+                    TotalEquipmentWeight = 60                
+                },
+                new GetSoldiersWithTotalEquipmentWeightData
+                {
+                    soldier = inputSoldier.Skip(1).First(),
+                    TotalEquipmentWeight = 30
+                },
+                new GetSoldiersWithTotalEquipmentWeightData
+                {
+                    soldier = inputSoldier.Skip(2).First(),
+                    TotalEquipmentWeight = 2
+                },
+                new GetSoldiersWithTotalEquipmentWeightData
+                {
+                    soldier = inputSoldier.Skip(3).First(),
+                    TotalEquipmentWeight = 5
+                },
+                new GetSoldiersWithTotalEquipmentWeightData
+                {
+                    soldier = inputSoldier.Skip(4).First(),
+                    TotalEquipmentWeight = 0
+                }
         };
 
             CollectionAssert.AreEquivalent(expectedResult, result);
