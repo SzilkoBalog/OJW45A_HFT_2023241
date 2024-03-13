@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
@@ -64,8 +65,9 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                         Name = SelectedArmyBase.Name
                     });
                 }
-                catch (Exception e)
+                catch (ArgumentException e)
                 {
+                    MessageBox.Show(e.Message);
                     ErrorMessage = e.Message;
                 }                
             });
