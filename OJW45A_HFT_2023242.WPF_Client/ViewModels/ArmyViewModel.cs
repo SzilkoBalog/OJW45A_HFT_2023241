@@ -51,7 +51,7 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
 
         public ArmyViewModel()
         {
-            ArmyBases = new RestCollection<ArmyBase>("http://localhost:36154/", "armybase");
+            ArmyBases = new RestCollection<ArmyBase>("http://localhost:36154/", "armybase", "hub");
             
             //Try-Catchek egyenlore nem mukodnek
 

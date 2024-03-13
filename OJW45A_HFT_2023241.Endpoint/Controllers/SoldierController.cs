@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json.Linq;
+using OJW45A_HFT_2023241.Endpoint.Services;
 using OJW45A_HFT_2023241.Logic.LogicInterfaces;
 using OJW45A_HFT_2023241.Models;
 using System.Collections.Generic;
@@ -12,10 +15,12 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
     public class SoldierController : ControllerBase
     {
         ISoldierLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public SoldierController(ISoldierLogic logic)
+        public SoldierController(ISoldierLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -34,18 +39,22 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] Soldier value)
         {
             this.logic.Create(value);
+            hub.Clients.All.SendAsync("SoldierCreated", value);
         }
 
         [HttpPut]
         public void Update([FromBody] Soldier value)
         {
             this.logic.Update(value);
+            hub.Clients.All.SendAsync("SoldierUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Soldier SoldierToDelete = this.logic.Read(id);
             this.logic.Delete(id);
+            hub.Clients.All.SendAsync("SoldierDeleted", SoldierToDelete);
         }
     }
 }

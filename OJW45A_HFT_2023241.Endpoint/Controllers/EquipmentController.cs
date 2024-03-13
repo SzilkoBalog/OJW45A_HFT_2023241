@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json.Linq;
+using OJW45A_HFT_2023241.Endpoint.Services;
 using OJW45A_HFT_2023241.Logic.LogicInterfaces;
 using OJW45A_HFT_2023241.Models;
 using System.Collections.Generic;
@@ -12,10 +15,12 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
     public class EquipmentController : ControllerBase
     {
         IEquipmentLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public EquipmentController(IEquipmentLogic logic)
+        public EquipmentController(IEquipmentLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -34,18 +39,22 @@ namespace OJW45A_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] Equipment value)
         {
             this.logic.Create(value);
+            hub.Clients.All.SendAsync("EquipmentCreated", value);
         }
 
         [HttpPut]
         public void Update([FromBody] Equipment value)
         {
             this.logic.Update(value);
+            hub.Clients.All.SendAsync("EquipmentUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Equipment EquipmentToDelete = this.logic.Read(id);
             this.logic.Delete(id);
+            hub.Clients.All.SendAsync("EquipmentDeleted", EquipmentToDelete);
         }
     }
 }

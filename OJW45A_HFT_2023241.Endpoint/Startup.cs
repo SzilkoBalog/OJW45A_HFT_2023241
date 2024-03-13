@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OJW45A_HFT_2023241.Endpoint.Services;
 using OJW45A_HFT_2023241.Logic.LogicInterfaces;
 using OJW45A_HFT_2023241.Logic.Logics;
 using OJW45A_HFT_2023241.Models;
@@ -34,6 +35,8 @@ namespace OJW45A_HFT_2023241.Endpoint
             services.AddTransient<IArmyBaseLogic, ArmyBaseLogic>();
             services.AddTransient<ISoldierLogic, SoldierLogic>();
             services.AddTransient<IEquipmentLogic, EquipmentLogic>();
+
+            services.AddSignalR();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -68,6 +71,7 @@ namespace OJW45A_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }
