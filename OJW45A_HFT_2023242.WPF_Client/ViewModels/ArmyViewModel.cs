@@ -42,6 +42,26 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             }
         }
 
+        private ArmyBase createdArmyBase;
+
+        public ArmyBase CreatedArmyBase
+        {
+            get { return createdArmyBase; }
+            set
+            {
+                if (value != null)
+                {
+                    createdArmyBase = new ArmyBase()
+                    {
+                        Name = value.Name,
+                        Id = value.Id                     
+                    };
+                    OnPropertyChanged();
+                    (CreateArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
+
         private string errorMessage;
 
         public string ErrorMessage
@@ -62,12 +82,13 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 {
                     ArmyBases.Add(new ArmyBase()
                     {
-                        Name = SelectedArmyBase.Name
+                        Name = CreatedArmyBase.Name,
+                        DateOfBuild = DateTime.ParseExact(CreatedArmyBase.DateOfBuild.Day.ToString()+"/"+ CreatedArmyBase.DateOfBuild.Month.ToString()+"/"+ CreatedArmyBase.DateOfBuild.Year.ToString(), "dd/MM/yyyy", null),
+                        NumberOfBeds = CreatedArmyBase.NumberOfBeds                        
                     });
                 }
                 catch (ArgumentException e)
                 {
-                    MessageBox.Show(e.Message);
                     ErrorMessage = e.Message;
                 }                
             });
@@ -75,6 +96,9 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             DeleteArmyBaseCommand = new RelayCommand(() =>
             {
                 ArmyBases.Delete(SelectedArmyBase.Id);
+                selectedArmyBase = null;
+                (DeleteArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
+                (UpdateArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
             },
             () =>
             {
@@ -85,6 +109,9 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             {
                 try
                 {
+                    SelectedArmyBase.Name = CreatedArmyBase.Name;
+                    SelectedArmyBase.DateOfBuild = CreatedArmyBase.DateOfBuild;
+                    SelectedArmyBase.NumberOfBeds = CreatedArmyBase.NumberOfBeds;
                     ArmyBases.Update(SelectedArmyBase);
                 }
                 catch (Exception e)
@@ -97,7 +124,8 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 return SelectedArmyBase != null;
             });
 
-            //SelectedArmyBase = null; ----> Ez amiatt van, hogy ha createl-ni akarunk azelott hogy kivalasztottunk army-baset --> Kell majd erre valami elegansabb megoldas
+            SelectedArmyBase = null;
+            CreatedArmyBase = new ArmyBase();
         }
     }
 }

@@ -15,20 +15,34 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding ArmyBases}" SelectedItem="{Binding SelectedArmyBase}" Grid.Column="1">
+        <ListBox ItemsSource="{Binding ArmyBases}" SelectedItem="{Binding SelectedArmyBase}" Grid.Column="1" HorizontalContentAlignment="Stretch" Padding="10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Name}"/>
+                    <Label BorderBrush="OrangeRed" BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="|" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding Name}" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="- Beds:" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding NumberOfBeds}" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="- Built:" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding DateOfBuild}" FontSize="15" FontFamily="Cascadia Code SemiBold"/>
+                        </StackPanel>
+                    </Label>                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="0">
-            <Label Content="Name" Background="LightGreen" Padding="10" />
-            <TextBox Text="{Binding SelectedArmyBase.Name}" Padding="10" Margin="0,0,0,30" />
-            <Button Content="Create Actor" Command="{Binding CreateArmyBaseCommand}" Margin="10" Padding="10" />
-            <Button Content="Delete Actor" Command="{Binding DeleteArmyBaseCommand}" Margin="10" Padding="10" />
-            <Button Content="Update Actor" Command="{Binding UpdateArmyBaseCommand}" Margin="10" Padding="10" />
-            <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
+            <Label Content="Enter Name:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2"/>
+            <TextBox Text="{Binding CreatedArmyBase.Name}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+            <Label Content="Enter date of build in DD/MM/YYYY:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2" FontSize="11"/>
+            <TextBox Text="{Binding CreatedArmyBase.DateOfBuild}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+            <Label Content="Enter number of beds:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2"/>
+            <TextBox Text="{Binding CreatedArmyBase.NumberOfBeds}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+            <Button Content="Create Base" Command="{Binding CreateArmyBaseCommand}" Margin="10,0,10,5" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed"/>
+            <Button Content="Delete Base" Command="{Binding DeleteArmyBaseCommand}" Margin="10,0,10,5" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed"/>
+            <Button Content="Update Base" Command="{Binding UpdateArmyBaseCommand}" Margin="10,0,10,5" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed"/>
+            <Label Content="{Binding SelectedArmyBase.Name}" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2" Foreground="LawnGreen"/>            
         </StackPanel>
     </Grid>
 </UserControl>
