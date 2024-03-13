@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
 {
-    internal class MainWindowViewModel : ObservableRecipient
+    public class MainWindowViewModel : ObservableRecipient
     {
         private UserControl currentControl;
 

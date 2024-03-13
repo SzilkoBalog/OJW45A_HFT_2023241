@@ -6,15 +6,11 @@
         xmlns:local="clr-namespace:OJW45A_HFT_2023242.WPF_Client"
         xmlns:vm="clr-namespace:OJW45A_HFT_2023242.WPF_Client.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="OJW45A Féléves Feladat" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="80*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="80*"/>
@@ -31,6 +27,6 @@
             <Button Content="Equipment" Grid.Column="2" Command="{Binding SetEquipmentCommand}"/>
             <Button Content="NonCrud" Grid.Column="3" Command="{Binding SetNonCrudCommand}"/>
         </Grid>
-        <UserControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentControll}"/>
+        <UserControl Grid.Row="1" Content="{Binding CurrentControll}"/>
     </Grid>
 </Window>
