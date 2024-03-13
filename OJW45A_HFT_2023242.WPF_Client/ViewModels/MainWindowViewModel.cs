@@ -36,7 +36,6 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
         private EquipmentUserControl equipmentControl;
         private NonCrudUserControl nonCrudControl;
 
-
         public static bool IsInDesignMode
         {
             get

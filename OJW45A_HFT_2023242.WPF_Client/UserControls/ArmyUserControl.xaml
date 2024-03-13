@@ -4,9 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OJW45A_HFT_2023242.WPF_Client.UserControls"
+             xmlns:vm="clr-namespace:OJW45A_HFT_2023242.WPF_Client.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <Control.DataContext>
+        <vm:ArmyViewModel/>
+    </Control.DataContext>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding ArmyBases}" SelectedItem="{Binding SelectedArmyBase}" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="0">
+            <Label Content="Name" Background="LightGreen" Padding="10" />
+            <TextBox Text="{Binding SelectedArmyBase.Name}" Padding="10" Margin="0,0,0,30" />
+            <Button Content="Create Actor" Command="{Binding CreateArmyBaseCommand}" Margin="10" Padding="10" />
+            <Button Content="Delete Actor" Command="{Binding DeleteArmyBaseCommand}" Margin="10" Padding="10" />
+            <Button Content="Update Actor" Command="{Binding UpdateArmyBaseCommand}" Margin="10" Padding="10" />
+            <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
+        </StackPanel>
     </Grid>
 </UserControl>
