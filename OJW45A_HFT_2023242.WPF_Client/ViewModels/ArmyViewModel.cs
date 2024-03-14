@@ -47,19 +47,7 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
         public ArmyBase CreatedArmyBase
         {
             get { return createdArmyBase; }
-            set
-            {
-                if (value != null)
-                {
-                    createdArmyBase = new ArmyBase()
-                    {
-                        Name = value.Name,
-                        Id = value.Id                     
-                    };
-                    OnPropertyChanged();
-                    (CreateArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
-                }
-            }
+            set { createdArmyBase = value; }
         }
 
         private string errorMessage;
