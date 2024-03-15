@@ -41,6 +41,14 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             }
         }
 
+        private Soldier createdSoldier;
+
+        public Soldier CreatedSoldier
+        {
+            get { return createdSoldier; }
+            set { createdSoldier = value; }
+        }
+
         private string errorMessage;
 
         public string ErrorMessage
@@ -61,10 +69,13 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 {
                     Soldiers.Add(new Soldier()
                     {
-                        Name = SelectedSoldier.Name
+                        Name = CreatedSoldier.Name,
+                        Age = CreatedSoldier.Age,
+                        Weight = CreatedSoldier.Weight,
+                        ArmyBaseId = CreatedSoldier.ArmyBaseId                        
                     });
                 }
-                catch (Exception e)
+                catch (ArgumentException e)
                 {
                     ErrorMessage = e.Message;
                 }
@@ -73,6 +84,9 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             DeleteSoldierCommand = new RelayCommand(() =>
             {
                 Soldiers.Delete(SelectedSoldier.Id);
+                selectedSoldier = null;
+                (DeleteSoldierCommand as RelayCommand).NotifyCanExecuteChanged();
+                (UpdateSoldierCommand as RelayCommand).NotifyCanExecuteChanged();
             },
             () =>
             {
@@ -83,6 +97,10 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             {
                 try
                 {
+                    SelectedSoldier.Name = CreatedSoldier.Name;
+                    SelectedSoldier.Age = CreatedSoldier.Age;
+                    SelectedSoldier.Weight = CreatedSoldier.Weight;
+                    SelectedSoldier.ArmyBaseId = CreatedSoldier.ArmyBaseId;
                     Soldiers.Update(SelectedSoldier);
                 }
                 catch (Exception e)
@@ -95,7 +113,8 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 return SelectedSoldier != null;
             });
 
-            //SelectedArmyBase = null; ----> Ez amiatt van, hogy ha createl-ni akarunk azelott hogy kivalasztottunk army-baset --> Kell majd erre valami elegansabb megoldas
+            SelectedSoldier = null;
+            CreatedSoldier = new Soldier();
         }
     }
 }
