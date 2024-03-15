@@ -31,7 +31,7 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 {
                     selectedEquipment = new Equipment()
                     {
-                        Type = value.Type,
+                        Description = value.Description,
                         Id = value.Id
                     };
                     OnPropertyChanged();
@@ -39,6 +39,14 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                     (UpdateEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
+        }
+
+        private Equipment createdEquipment;
+
+        public Equipment CreatedEquipment
+        {
+            get { return createdEquipment; }
+            set { createdEquipment = value; }
         }
 
         private string errorMessage;
@@ -61,10 +69,13 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 {
                     Equipment.Add(new Equipment()
                     {
-                        Type = SelectedEquipment.Type
+                        Type = CreatedEquipment.Type,
+                        Description = CreatedEquipment.Description,
+                        Weight = CreatedEquipment.Weight,
+                        SoldierId = CreatedEquipment.SoldierId
                     });
                 }
-                catch (Exception e)
+                catch (ArgumentException e)
                 {
                     ErrorMessage = e.Message;
                 }
@@ -73,6 +84,9 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             DeleteEquipmentCommand = new RelayCommand(() =>
             {
                 Equipment.Delete(SelectedEquipment.Id);
+                selectedEquipment = null;
+                (DeleteEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
+                (UpdateEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
             },
             () =>
             {
@@ -83,6 +97,10 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             {
                 try
                 {
+                    SelectedEquipment.Type = CreatedEquipment.Type;
+                    SelectedEquipment.Description = CreatedEquipment.Description;
+                    SelectedEquipment.Weight = CreatedEquipment.Weight;
+                    SelectedEquipment.SoldierId = CreatedEquipment.SoldierId;
                     Equipment.Update(SelectedEquipment);
                 }
                 catch (Exception e)
@@ -95,7 +113,8 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
                 return SelectedEquipment != null;
             });
 
-            //SelectedArmyBase = null; ----> Ez amiatt van, hogy ha createl-ni akarunk azelott hogy kivalasztottunk army-baset --> Kell majd erre valami elegansabb megoldas
+            SelectedEquipment = null;
+            CreatedEquipment = new Equipment();
         }
     }
 }

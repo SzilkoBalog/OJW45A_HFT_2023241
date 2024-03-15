@@ -4,9 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OJW45A_HFT_2023242.WPF_Client.UserControls"
+             xmlns:vm="clr-namespace:OJW45A_HFT_2023242.WPF_Client.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <Control.DataContext>
+        <vm:EquipmentViewModel/>
+    </Control.DataContext>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Equipment}" SelectedItem="{Binding SelectedEquipment}" Grid.Column="1" HorizontalContentAlignment="Stretch" Padding="10" BorderBrush="Black" BorderThickness="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label BorderBrush="OrangeRed" BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Id}" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="|" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding Type}" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="- Description:" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding Description}" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="- Weight:" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding Weight}" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="- Soldier ID:" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                            <Label Content="{Binding SoldierId}" FontSize="10" FontFamily="Cascadia Code SemiBold"/>
+                        </StackPanel>
+                    </Label>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="2">
+            <StackPanel>
+                <Label Content="Enter Type:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="25" BorderBrush="Black" BorderThickness="2" FontSize="10"/>
+                <TextBox Text="{Binding CreatedEquipment.Type}" Height="25" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+                <Label Content="Enter Description" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="25" BorderBrush="Black" BorderThickness="2" FontSize="10"/>
+                <TextBox Text="{Binding CreatedEquipment.Description, StringFormat={}{0:d}}" Height="25" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+                <Label Content="Enter Weight:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="25" BorderBrush="Black" BorderThickness="2" FontSize="10"/>
+                <TextBox Text="{Binding CreatedEquipment.Weight}" Height="25" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+                <Label Content="Enter Soldier ID:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="25" BorderBrush="Black" BorderThickness="2" FontSize="10"/>
+                <TextBox Text="{Binding CreatedEquipment.SoldierId}" Height="25" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+                <Button Content="Create Equipment" Command="{Binding CreateEquipmentCommand}" Margin="10,0,10,0" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed" BorderBrush="Black" BorderThickness="2"/>
+                <Button Content="Delete Equipment" Command="{Binding DeleteEquipmentCommand}" Margin="10,0,10,0" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed" BorderBrush="Black" BorderThickness="2"/>
+                <Button Content="Update Equipment" Command="{Binding UpdateEquipmentCommand}" Margin="10,0,10,0" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed" BorderBrush="Black" BorderThickness="2"/>
+                <Label Content="{Binding SelectedEquipment.Description}" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2" Foreground="LawnGreen"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
