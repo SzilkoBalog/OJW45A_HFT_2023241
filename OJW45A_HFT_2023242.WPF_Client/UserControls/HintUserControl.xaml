@@ -15,7 +15,7 @@
             <RowDefinition Height="48*"/>
             <RowDefinition Height="52*"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding hint1}" Grid.Row="0" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed" FontSize="12"/>
-        <Label Content="{Binding hint2}" Grid.Row="1" FontFamily="Cascadia Code SemiBold" Background="Gray" Foreground="OrangeRed" FontSize="11"/>
+        <Label Content="{Binding hint1}" Grid.Row="0" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed" FontSize="12" BorderBrush="Black" BorderThickness="2"/>
+        <Label Content="{Binding hint2}" Grid.Row="1" FontFamily="Cascadia Code SemiBold" Background="Gray" Foreground="OrangeRed" FontSize="11" BorderBrush="Black" BorderThickness="2"/>
     </Grid>
 </UserControl>

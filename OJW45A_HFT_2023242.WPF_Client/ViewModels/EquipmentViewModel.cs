@@ -49,36 +49,19 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             set { createdEquipment = value; }
         }
 
-        private string errorMessage;
-
-        public string ErrorMessage
-        {
-            get { return errorMessage; }
-            set { SetProperty(ref errorMessage, value); }
-        }
-
         public EquipmentViewModel()
         {
             Equipment = new RestCollection<Equipment>("http://localhost:36154/", "equipment", "hub");
 
-            //Try-Catchek egyenlore nem mukodnek
-
             CreateEquipmentCommand = new RelayCommand(() =>
             {
-                try
+                Equipment.Add(new Equipment()
                 {
-                    Equipment.Add(new Equipment()
-                    {
-                        Type = CreatedEquipment.Type,
-                        Description = CreatedEquipment.Description,
-                        Weight = CreatedEquipment.Weight,
-                        SoldierId = CreatedEquipment.SoldierId
-                    });
-                }
-                catch (ArgumentException e)
-                {
-                    ErrorMessage = e.Message;
-                }
+                    Type = CreatedEquipment.Type,
+                    Description = CreatedEquipment.Description,
+                    Weight = CreatedEquipment.Weight,
+                    SoldierId = CreatedEquipment.SoldierId
+                });
             });
 
             DeleteEquipmentCommand = new RelayCommand(() =>
@@ -95,18 +78,11 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
 
             UpdateEquipmentCommand = new RelayCommand(() =>
             {
-                try
-                {
-                    SelectedEquipment.Type = CreatedEquipment.Type;
-                    SelectedEquipment.Description = CreatedEquipment.Description;
-                    SelectedEquipment.Weight = CreatedEquipment.Weight;
-                    SelectedEquipment.SoldierId = CreatedEquipment.SoldierId;
-                    Equipment.Update(SelectedEquipment);
-                }
-                catch (Exception e)
-                {
-                    ErrorMessage = e.Message;
-                }
+                SelectedEquipment.Type = CreatedEquipment.Type;
+                SelectedEquipment.Description = CreatedEquipment.Description;
+                SelectedEquipment.Weight = CreatedEquipment.Weight;
+                SelectedEquipment.SoldierId = CreatedEquipment.SoldierId;
+                Equipment.Update(SelectedEquipment);
             },
             () =>
             {

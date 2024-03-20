@@ -50,35 +50,20 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             set { createdArmyBase = value; }
         }
 
-        private string errorMessage;
-
-        public string ErrorMessage
-        {
-            get { return errorMessage; }
-            set { SetProperty(ref errorMessage, value); }
-        }
+        private DateTime temp;
 
         public ArmyViewModel()
         {
             ArmyBases = new RestCollection<ArmyBase>("http://localhost:36154/", "armybase", "hub");
-            
-            //Try-Catchek egyenlore nem mukodnek
 
             CreateArmyBaseCommand = new RelayCommand(() =>
-            {
-                try
+            {                
+                ArmyBases.Add(new ArmyBase()
                 {
-                    ArmyBases.Add(new ArmyBase()
-                    {
-                        Name = CreatedArmyBase.Name,
-                        DateOfBuild = DateTime.ParseExact(CreatedArmyBase.DateOfBuild.Day.ToString()+"/"+ CreatedArmyBase.DateOfBuild.Month.ToString()+"/"+ CreatedArmyBase.DateOfBuild.Year.ToString(), "dd/MM/yyyy", null),
-                        NumberOfBeds = CreatedArmyBase.NumberOfBeds                        
-                    });
-                }
-                catch (ArgumentException e)
-                {
-                    ErrorMessage = e.Message;
-                }                
+                    Name = CreatedArmyBase.Name,
+                    DateOfBuild = CreatedArmyBase.DateOfBuild,
+                    NumberOfBeds = CreatedArmyBase.NumberOfBeds
+                });
             });
 
             DeleteArmyBaseCommand = new RelayCommand(() =>
@@ -95,17 +80,10 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
 
             UpdateArmyBaseCommand = new RelayCommand(() =>
             {
-                try
-                {
-                    SelectedArmyBase.Name = CreatedArmyBase.Name;
-                    SelectedArmyBase.DateOfBuild = CreatedArmyBase.DateOfBuild;
-                    SelectedArmyBase.NumberOfBeds = CreatedArmyBase.NumberOfBeds;
-                    ArmyBases.Update(SelectedArmyBase);
-                }
-                catch (Exception e)
-                {
-                    ErrorMessage = e.Message;
-                }
+                SelectedArmyBase.Name = CreatedArmyBase.Name;
+                SelectedArmyBase.DateOfBuild = CreatedArmyBase.DateOfBuild;
+                SelectedArmyBase.NumberOfBeds = CreatedArmyBase.NumberOfBeds;
+                ArmyBases.Update(SelectedArmyBase);
             },
             () =>
             {
@@ -113,7 +91,7 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             });
 
             SelectedArmyBase = null;
-            CreatedArmyBase = new ArmyBase();
+            CreatedArmyBase = new ArmyBase() { DateOfBuild = DateTime.Now};
         }
     }
 }
