@@ -36,8 +36,8 @@
             <StackPanel>
                 <Label Content="Enter Name:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2"/>
                 <TextBox Text="{Binding CreatedArmyBase.Name}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
-                <Label Content="Enter date of build in DD/MM/YYYY:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2" FontSize="11"/>
-                <TextBox Text="{Binding CreatedArmyBase.DateOfBuild, StringFormat={}{0:d}}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
+                <Label Content="Enter date of build in MM/DD/YYYY:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2" FontSize="11"/>
+                <TextBox Text="{Binding CreatedArmyBase.DateOfBuild, StringFormat={}{0:MM/dd/yyyy}}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
                 <Label Content="Enter number of beds:" Background="DarkGray" HorizontalContentAlignment="Center" FontFamily="Cascadia Code" Height="30" BorderBrush="Black" BorderThickness="2"/>
                 <TextBox Text="{Binding CreatedArmyBase.NumberOfBeds}" Height="30" BorderBrush="Black" BorderThickness="2" Background="LightGray"/>
                 <Button Content="Create Base" Command="{Binding CreateArmyBaseCommand}" Margin="10,5,10,5" Padding="10" FontFamily="Cascadia Code SemiBold" Background="DarkGray" Foreground="OrangeRed" BorderBrush="Black" BorderThickness="2"/>

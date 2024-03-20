@@ -49,36 +49,19 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             set { createdSoldier = value; }
         }
 
-        private string errorMessage;
-
-        public string ErrorMessage
-        {
-            get { return errorMessage; }
-            set { SetProperty(ref errorMessage, value); }
-        }
-
         public SoldierViewModel()
         {
             Soldiers = new RestCollection<Soldier>("http://localhost:36154/", "soldier", "hub");
 
-            //Try-Catchek egyenlore nem mukodnek
-
             CreateSoldierCommand = new RelayCommand(() =>
             {
-                try
+                Soldiers.Add(new Soldier()
                 {
-                    Soldiers.Add(new Soldier()
-                    {
-                        Name = CreatedSoldier.Name,
-                        Age = CreatedSoldier.Age,
-                        Weight = CreatedSoldier.Weight,
-                        ArmyBaseId = CreatedSoldier.ArmyBaseId                        
-                    });
-                }
-                catch (ArgumentException e)
-                {
-                    ErrorMessage = e.Message;
-                }
+                    Name = CreatedSoldier.Name,
+                    Age = CreatedSoldier.Age,
+                    Weight = CreatedSoldier.Weight,
+                    ArmyBaseId = CreatedSoldier.ArmyBaseId
+                });
             });
 
             DeleteSoldierCommand = new RelayCommand(() =>
@@ -95,18 +78,11 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
 
             UpdateSoldierCommand = new RelayCommand(() =>
             {
-                try
-                {
-                    SelectedSoldier.Name = CreatedSoldier.Name;
-                    SelectedSoldier.Age = CreatedSoldier.Age;
-                    SelectedSoldier.Weight = CreatedSoldier.Weight;
-                    SelectedSoldier.ArmyBaseId = CreatedSoldier.ArmyBaseId;
-                    Soldiers.Update(SelectedSoldier);
-                }
-                catch (Exception e)
-                {
-                    ErrorMessage = e.Message;
-                }
+                SelectedSoldier.Name = CreatedSoldier.Name;
+                SelectedSoldier.Age = CreatedSoldier.Age;
+                SelectedSoldier.Weight = CreatedSoldier.Weight;
+                SelectedSoldier.ArmyBaseId = CreatedSoldier.ArmyBaseId;
+                Soldiers.Update(SelectedSoldier);
             },
             () =>
             {
