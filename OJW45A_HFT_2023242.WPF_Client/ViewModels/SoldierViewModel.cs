@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
@@ -53,36 +54,59 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
         {
             Soldiers = new RestCollection<Soldier>("http://localhost:36154/", "soldier", "hub");
 
-            CreateSoldierCommand = new RelayCommand(() =>
+            CreateSoldierCommand = new RelayCommand(async () =>
             {
-                Soldiers.Add(new Soldier()
+                try
                 {
-                    Name = CreatedSoldier.Name,
-                    Age = CreatedSoldier.Age,
-                    Weight = CreatedSoldier.Weight,
-                    ArmyBaseId = CreatedSoldier.ArmyBaseId
-                });
+                    await Soldiers.Add(new Soldier()
+                    {
+                        Name = CreatedSoldier.Name,
+                        Age = CreatedSoldier.Age,
+                        Weight = CreatedSoldier.Weight,
+                        ArmyBaseId = CreatedSoldier.ArmyBaseId
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
 
-            DeleteSoldierCommand = new RelayCommand(() =>
+            DeleteSoldierCommand = new RelayCommand(async () =>
             {
-                Soldiers.Delete(SelectedSoldier.Id);
-                selectedSoldier = null;
-                (DeleteSoldierCommand as RelayCommand).NotifyCanExecuteChanged();
-                (UpdateSoldierCommand as RelayCommand).NotifyCanExecuteChanged();
+                try
+                {
+
+                    await Soldiers.Delete(SelectedSoldier.Id);
+                    selectedSoldier = null;
+                    (DeleteSoldierCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (UpdateSoldierCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             },
             () =>
             {
                 return SelectedSoldier != null;
             });
 
-            UpdateSoldierCommand = new RelayCommand(() =>
+            UpdateSoldierCommand = new RelayCommand(async () =>
             {
-                SelectedSoldier.Name = CreatedSoldier.Name;
-                SelectedSoldier.Age = CreatedSoldier.Age;
-                SelectedSoldier.Weight = CreatedSoldier.Weight;
-                SelectedSoldier.ArmyBaseId = CreatedSoldier.ArmyBaseId;
-                Soldiers.Update(SelectedSoldier);
+                try
+                {
+                    SelectedSoldier.Name = CreatedSoldier.Name;
+                    SelectedSoldier.Age = CreatedSoldier.Age;
+                    SelectedSoldier.Weight = CreatedSoldier.Weight;
+                    SelectedSoldier.ArmyBaseId = CreatedSoldier.ArmyBaseId;
+                    await Soldiers.Update(SelectedSoldier);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             },
             () =>
             {

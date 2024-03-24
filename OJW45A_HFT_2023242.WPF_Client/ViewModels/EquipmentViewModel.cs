@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
@@ -53,36 +54,57 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
         {
             Equipment = new RestCollection<Equipment>("http://localhost:36154/", "equipment", "hub");
 
-            CreateEquipmentCommand = new RelayCommand(() =>
+            CreateEquipmentCommand = new RelayCommand(async () =>
             {
-                Equipment.Add(new Equipment()
+                try
                 {
-                    Type = CreatedEquipment.Type,
-                    Description = CreatedEquipment.Description,
-                    Weight = CreatedEquipment.Weight,
-                    SoldierId = CreatedEquipment.SoldierId
-                });
+                    await Equipment.Add(new Equipment()
+                    {
+                        Type = CreatedEquipment.Type,
+                        Description = CreatedEquipment.Description,
+                        Weight = CreatedEquipment.Weight,
+                        SoldierId = CreatedEquipment.SoldierId
+                    });
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
 
-            DeleteEquipmentCommand = new RelayCommand(() =>
+            DeleteEquipmentCommand = new RelayCommand(async () =>
             {
-                Equipment.Delete(SelectedEquipment.Id);
-                selectedEquipment = null;
-                (DeleteEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
-                (UpdateEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
+                try
+                {
+                    await Equipment.Delete(SelectedEquipment.Id);
+                    selectedEquipment = null;
+                    (DeleteEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (UpdateEquipmentCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             },
             () =>
             {
                 return SelectedEquipment != null;
             });
 
-            UpdateEquipmentCommand = new RelayCommand(() =>
+            UpdateEquipmentCommand = new RelayCommand(async () =>
             {
-                SelectedEquipment.Type = CreatedEquipment.Type;
-                SelectedEquipment.Description = CreatedEquipment.Description;
-                SelectedEquipment.Weight = CreatedEquipment.Weight;
-                SelectedEquipment.SoldierId = CreatedEquipment.SoldierId;
-                Equipment.Update(SelectedEquipment);
+                try
+                {
+                    SelectedEquipment.Type = CreatedEquipment.Type;
+                    SelectedEquipment.Description = CreatedEquipment.Description;
+                    SelectedEquipment.Weight = CreatedEquipment.Weight;
+                    SelectedEquipment.SoldierId = CreatedEquipment.SoldierId;
+                    Equipment.Update(SelectedEquipment);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             },
             () =>
             {

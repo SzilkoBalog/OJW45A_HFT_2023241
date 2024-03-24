@@ -56,34 +56,57 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
         {
             ArmyBases = new RestCollection<ArmyBase>("http://localhost:36154/", "armybase", "hub");
 
-            CreateArmyBaseCommand = new RelayCommand(() =>
-            {                
-                ArmyBases.Add(new ArmyBase()
+            CreateArmyBaseCommand = new RelayCommand(async () =>
+            {
+                try
                 {
-                    Name = CreatedArmyBase.Name,
-                    DateOfBuild = CreatedArmyBase.DateOfBuild,
-                    NumberOfBeds = CreatedArmyBase.NumberOfBeds
-                });
+                    await ArmyBases.Add(new ArmyBase()
+                    {
+                        Name = CreatedArmyBase.Name,
+                        DateOfBuild = CreatedArmyBase.DateOfBuild,
+                        NumberOfBeds = CreatedArmyBase.NumberOfBeds
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             });
 
-            DeleteArmyBaseCommand = new RelayCommand(() =>
+            DeleteArmyBaseCommand = new RelayCommand(async () =>
             {
-                ArmyBases.Delete(SelectedArmyBase.Id);
-                selectedArmyBase = null;
-                (DeleteArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
-                (UpdateArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
+                try
+                {
+                    await ArmyBases.Delete(SelectedArmyBase.Id);
+                    selectedArmyBase = null;
+                    (DeleteArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (UpdateArmyBaseCommand as RelayCommand).NotifyCanExecuteChanged();
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             },
             () =>
             {
                 return SelectedArmyBase != null;
             });
 
-            UpdateArmyBaseCommand = new RelayCommand(() =>
+            UpdateArmyBaseCommand = new RelayCommand(async () =>
             {
-                SelectedArmyBase.Name = CreatedArmyBase.Name;
-                SelectedArmyBase.DateOfBuild = CreatedArmyBase.DateOfBuild;
-                SelectedArmyBase.NumberOfBeds = CreatedArmyBase.NumberOfBeds;
-                ArmyBases.Update(SelectedArmyBase);
+                try
+                {
+                    SelectedArmyBase.Name = CreatedArmyBase.Name;
+                    SelectedArmyBase.DateOfBuild = CreatedArmyBase.DateOfBuild;
+                    SelectedArmyBase.NumberOfBeds = CreatedArmyBase.NumberOfBeds;
+                    await ArmyBases.Update(SelectedArmyBase);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             },
             () =>
             {
@@ -91,7 +114,7 @@ namespace OJW45A_HFT_2023242.WPF_Client.ViewModels
             });
 
             SelectedArmyBase = null;
-            CreatedArmyBase = new ArmyBase() { DateOfBuild = DateTime.Now};
+            CreatedArmyBase = new ArmyBase() { DateOfBuild = DateTime.Now };
         }
     }
 }

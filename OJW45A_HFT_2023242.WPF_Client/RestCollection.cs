@@ -70,8 +70,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
             else
             {
-                var error = await response.Content.ReadAsAsync<RestExceptionInfo>();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             return items;
         }
@@ -86,8 +93,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
             else
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             return items;
         }
@@ -102,8 +116,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
             else
             {
-                var error = await response.Content.ReadAsAsync<RestExceptionInfo>();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             return item;
         }
@@ -118,8 +139,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
             else
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             return item;
         }
@@ -134,8 +162,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
             else
             {
-                var error = await response.Content.ReadAsAsync<RestExceptionInfo>();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             return item;
         }
@@ -150,8 +185,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
             else
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             return item;
         }
@@ -163,8 +205,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
             if (!response.IsSuccessStatusCode)
             {
-                var error = await response.Content.ReadAsAsync<RestExceptionInfo>();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             response.EnsureSuccessStatusCode();
         }
@@ -176,8 +225,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
             if (!response.IsSuccessStatusCode)
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
             response.EnsureSuccessStatusCode();
         }
@@ -189,8 +245,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
             if (!response.IsSuccessStatusCode)
             {
-                var error = await response.Content.ReadAsAsync<RestExceptionInfo>();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
 
             response.EnsureSuccessStatusCode();
@@ -203,8 +266,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
             if (!response.IsSuccessStatusCode)
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
 
             response.EnsureSuccessStatusCode();
@@ -217,10 +287,16 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
             if (!response.IsSuccessStatusCode)
             {
-                var error = await response.Content.ReadAsAsync<RestExceptionInfo>();
-                throw new ArgumentException(error.Msg);
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
             }
-
             response.EnsureSuccessStatusCode();
         }
 
@@ -231,13 +307,19 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
             if (!response.IsSuccessStatusCode)
             {
-                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
-                throw new ArgumentException(error.Msg);
-            }
+                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                    throw new ArgumentException(error.Msg);
+                }
+                else
+                {
+                    throw new ArgumentException(response.StatusCode.ToString());
+                }
 
+            }
             response.EnsureSuccessStatusCode();
         }
-
     }
     public class RestExceptionInfo
     {
@@ -346,15 +428,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             else return new List<T>().GetEnumerator();
         }
 
-        public void Add(T item)
+        public async Task Add(T item)
         {
             if (hasSignalR)
             {
-                this.rest.PostAsync(item, typeof(T).Name);
+                await this.rest.PostAsync(item, typeof(T).Name);
             }
             else
             {
-                this.rest.PostAsync(item, typeof(T).Name).ContinueWith((t) =>
+                await this.rest.PostAsync(item, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -368,15 +450,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
 
         }
 
-        public void Update(T item)
+        public async Task Update(T item)
         {
             if (hasSignalR)
             {
-                this.rest.PutAsync(item, typeof(T).Name);
+                await this.rest.PutAsync(item, typeof(T).Name);
             }
             else
             {
-                this.rest.PutAsync(item, typeof(T).Name).ContinueWith((t) =>
+                await this.rest.PutAsync(item, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -389,15 +471,15 @@ namespace OJW45A_HFT_2023242.WPF_Client
             }
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             if (hasSignalR)
             {
-                this.rest.DeleteAsync(id, typeof(T).Name);
+                await this.rest.DeleteAsync(id, typeof(T).Name);
             }
             else
             {
-                this.rest.DeleteAsync(id, typeof(T).Name).ContinueWith((t) =>
+                await this.rest.DeleteAsync(id, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
