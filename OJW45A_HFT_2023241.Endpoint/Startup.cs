@@ -64,6 +64,12 @@ namespace OJW45A_HFT_2023241.Endpoint
                 await context.Response.WriteAsJsonAsync(response);
             }));
 
+            app.UseCors(x => x
+            .AllowCredentials()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithOrigins("http://localhost:53027"));
+
             app.UseRouting();
 
             app.UseAuthorization();
