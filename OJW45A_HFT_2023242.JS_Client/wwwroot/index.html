@@ -6,7 +6,38 @@
     <link rel=" stylesheet" href="style.css" />
 </head>
 <body>
+    <h1>Army Base Catalog</h1>
 
+    <div id="formdiv">
+        <label>Base Data:</label>
+        <input type="text" id="basename" />
+        <input type="number" id="numberofbeds" />
+        <input type="date" id="dateofbuild" />
+        <button type="button" onclick="create()">Add Base</button>
+    </div>
+
+    <div id="updateformdiv">
+        <label>Base Data:</label>
+        <input type="text" id="basenameupdate" />
+        <input type="number" id="numberofbedsupdate" />
+        <input type="date" id="dateofbuildupdate" />
+        <button type="button" onclick="update()">Update Base</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Number of beds</th>
+                <th>Date of buid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea1">
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
