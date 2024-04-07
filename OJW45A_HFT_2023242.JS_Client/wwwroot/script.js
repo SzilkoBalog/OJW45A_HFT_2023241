@@ -117,8 +117,8 @@ function display() {
     equipment.forEach(t => {
         document.getElementById('resultarea3').innerHTML += "<tr><td>" + t.id + "</td><td>" + t.type + "</td><td>" + t.description
             + "</td><td>" + t.weight + "</td><td>" + t.soldierId +
-            "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` +
-            `<button type="button" onclick="showupdate(${t.id})">Update</button>` +
+            "</td><td>" + `<button type="button" onclick="removeEquipment(${t.id})">Delete</button>` +
+            `<button type="button" onclick="showupdateEquipment(${t.id})">Update</button>` +
             "</td></tr>";
     }
     )
@@ -242,6 +242,73 @@ function updateSoldier() {
                 age: age,
                 weight: soldierWeight,
                 armyBaseId: baseId
+            }),
+    })
+        .then(response => response)
+        .then(data => { console.log('Success:', data); getdata(); })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+
+
+
+function createEquipment() {
+    let type = document.getElementById('type').value;
+    let description = document.getElementById('description').value;
+    let equipmentWeight = document.getElementById('equipmentweight').value;
+    let soldierId = document.getElementById('soldierid').value;
+    fetch('http://localhost:36154/equipment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                type: type,
+                description: description,
+                weight: equipmentWeight,
+                soldierId: soldierId,
+            }),
+    })
+        .then(response => response)
+        .then(data => { console.log('Success:', data); getdata(); })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function removeEquipment(id) {
+    fetch('http://localhost:36154/equipment/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', },
+        body: null
+    })
+        .then(response => response)
+        .then(data => { console.log('Success:', data); getdata(); })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function showupdateEquipment(id) {
+    document.getElementById('typeupdate').value = equipment.find(t => t['id'] == id)['type'];
+    document.getElementById('descriptionupdate').value = equipment.find(t => t['id'] == id)['description'];
+    document.getElementById('equipmentweightupdate').value = equipment.find(t => t['id'] == id)['weight'];
+    document.getElementById('soldieridupdate').value = equipment.find(t => t['id'] == id)['soldierId'];
+    document.getElementById('updateformdiv3').style.display = 'block';
+    equipmentIdToUpdate = id;
+}
+
+function updateEquipment() {
+    document.getElementById('updateformdiv3').style.display = 'none';
+    let type = document.getElementById('typeupdate').value;
+    let description = document.getElementById('descriptionupdate').value;
+    let equipmentWeight = document.getElementById('equipmentweightupdate').value;
+    let soldierId = document.getElementById('soldieridupdate').value;
+    fetch('http://localhost:36154/equipment', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                id: equipmentIdToUpdate,
+                type: type,
+                description: description,
+                weight: equipmentWeight,
+                soldierId: soldierId
             }),
     })
         .then(response => response)
