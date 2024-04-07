@@ -1,9 +1,13 @@
 ﻿let armyBases = [];
+let soldiers = [];
+let equipment = [];
 let connection = null;
 getdata();
 setupSignalR();
 
 let armyBaseIdToUpdate = -1;
+let soldierIdToUpdate = -1;
+let equipmentIdToUpdate = -1;
 
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
@@ -20,6 +24,30 @@ function setupSignalR() {
     });
 
     connection.on("ArmyBaseUpdated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("SoldierCreated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("SoldierUpdated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("SoldierDeleted", (user, message) => {
+        getdata();
+    });
+
+    connection.on("EquipmentCreated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("EquipmentUpdated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("EquipmentDeleted", (user, message) => {
         getdata();
     });
 
@@ -47,6 +75,22 @@ async function getdata() {
             console.log(armyBases);
             display();
         });
+
+    await fetch('http://localhost:36154/soldier')
+        .then(x => x.json())
+        .then(y => {
+            soldiers = y;
+            console.log(soldiers);
+            display();
+        });
+
+    await fetch('http://localhost:36154/equipment')
+        .then(x => x.json())
+        .then(y => {
+            equipment = y;
+            console.log(equipment);
+            display();
+        });
 }
 
 function display() {
@@ -57,6 +101,26 @@ function display() {
             `<button type="button" onclick="showupdate(${t.id})">Update</button>` +
             "</td></tr>";
         }
+    )
+
+    document.getElementById('resultarea2').innerHTML = "";
+    soldiers.forEach(t => {
+        document.getElementById('resultarea2').innerHTML += "<tr><td>" + t.id + "</td><td>" + t.name
+            + "</td><td>" + t.age + "</td><td>" + t.weight + "</td><td>" + t.armyBaseId +
+            "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` +
+            `<button type="button" onclick="showupdate(${t.id})">Update</button>` +
+            "</td></tr>";
+    }
+    )
+
+    document.getElementById('resultarea3').innerHTML = "";
+    equipment.forEach(t => {
+        document.getElementById('resultarea3').innerHTML += "<tr><td>" + t.id + "</td><td>" + t.type + "</td><td>" + t.description
+            + "</td><td>" + t.weight + "</td><td>" + t.soldierId +
+            "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` +
+            `<button type="button" onclick="showupdate(${t.id})">Update</button>` +
+            "</td></tr>";
+    }
     )
 }
 
@@ -93,12 +157,12 @@ function showupdate(id) {
     document.getElementById('basenameupdate').value = armyBases.find(t => t['id'] == id)['name'];
     document.getElementById('numberofbedsupdate').value = armyBases.find(t => t['id'] == id)['numberOfBeds'];
     document.getElementById('dateofbuildupdate').value = armyBases.find(t => t['id'] == id)['dateOfBuild'];
-    document.getElementById('updateformdiv').style.display = 'flex';
+    document.getElementById('updateformdiv1').style.display = 'block';
     armyBaseIdToUpdate = id;
 }
 
 function update() {
-    document.getElementById('updateformdiv').style.display = 'none';
+    document.getElementById('updateformdiv1').style.display = 'none';
     let name = document.getElementById('basenameupdate').value;
     let numberofbeds = document.getElementById('numberofbedsupdate').value;
     let dateofbuild = document.getElementById('dateofbuildupdate').value;

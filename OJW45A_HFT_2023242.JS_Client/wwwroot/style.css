@@ -4,15 +4,15 @@ body {
 }
 
 body {
-    margin: 0;
-    background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
-    background: linear-gradient(45deg, #49a09d, #5f2c82);
+    margin: 20px;
+    background: -webkit-linear-gradient(5deg, #49a09d, #5f2c82);
+    background: linear-gradient(5deg, #49a09d, #5f2c82);
     font-family: sans-serif;
     font-weight: 100;
 }
 
 .container {
-    position: absolute;
+    position: page;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -20,10 +20,12 @@ body {
 }
 
 table {
-    width: 800px;
+    width: 1000px;
     border-collapse: collapse;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 th,
@@ -60,27 +62,130 @@ tbody td {
         z-index: -1;
     }
 
-#formdiv label, button, input {
+#formdiv1 label, button, input {
     margin: 10px;
     padding: 10px;
 }
 
-#formdiv label {
+#formdiv1 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+#formdiv1 label {
     font-weight: bolder;
     font-size: x-large
 }
 
-#updateformdiv {
+#updateformdiv1 label, button, input {
+    margin: 10px;
+    padding: 10px;
+}
+
+#updateformdiv1 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+#updateformdiv1 label {
+    font-weight: bolder;
+    font-size: x-large
+}
+
+#updateformdiv1 {
     display: none
 }
 
-#updateformdiv label, button, input {
+#showdiv1 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+
+#formdiv2 label, button, input {
     margin: 10px;
     padding: 10px;
 }
 
-#updateformdiv label {
+#formdiv2 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+#formdiv2 label {
     font-weight: bolder;
     font-size: x-large
 }
 
+#updateformdiv2 label, button, input {
+    margin: 10px;
+    padding: 10px;
+}
+
+#updateformdiv2 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+#updateformdiv2 label {
+    font-weight: bolder;
+    font-size: x-large
+}
+
+#updateformdiv2 {
+    display: none
+}
+
+#showdiv2 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+
+#formdiv3 label, button, input {
+    margin: 10px;
+    padding: 10px;
+}
+
+#formdiv3 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+#formdiv3 label {
+    font-weight: bolder;
+    font-size: x-large
+}
+
+#updateformdiv3 label, button, input {
+    margin: 10px;
+    padding: 10px;
+}
+
+#updateformdiv3 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}
+
+#updateformdiv3 label {
+    font-weight: bolder;
+    font-size: x-large
+}
+
+#updateformdiv3 {
+    display: none
+}
+
+#showdiv3 button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25%;
+}

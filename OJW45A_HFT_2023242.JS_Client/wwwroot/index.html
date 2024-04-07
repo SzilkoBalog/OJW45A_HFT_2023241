@@ -8,7 +8,7 @@
 <body>
     <h1>Army Base Catalog</h1>
 
-    <div id="formdiv">
+    <div id="formdiv1">
         <label>Base Data:</label>
         <input type="text" id="basename" />
         <input type="number" id="numberofbeds" />
@@ -16,7 +16,7 @@
         <button type="button" onclick="create()">Add Base</button>
     </div>
 
-    <div id="updateformdiv">
+    <div id="updateformdiv1">
         <label>Base Data:</label>
         <input type="text" id="basenameupdate" />
         <input type="number" id="numberofbedsupdate" />
@@ -24,19 +24,96 @@
         <button type="button" onclick="update()">Update Base</button>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Number of beds</th>
-                <th>Date of buid</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="resultarea1">
-        </tbody>
-    </table>
+    <div id="showdiv1">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Number of beds</th>
+                    <th>Date of buid</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="resultarea1">
+            </tbody>
+        </table>
+    </div>
+
+    <h1>Soldier Catalog</h1>
+
+    <div id="formdiv2">
+        <label>Soldier Data:</label>
+        <input type="text" id="soldiername" />
+        <input type="number" id="age" />
+        <input type="number" id="soldierweight" />
+        <input type="number" id="baseid" />
+        <button type="button" onclick="create()">Add Soldier</button>
+    </div>
+
+    <div id="updateformdiv2">
+        <label>Soldier Data:</label>
+        <input type="text" id="soldiernameupdate" />
+        <input type="number" id="ageupdate" />
+        <input type="number" id="soldierweightupdate" />
+        <input type="number" id="baseidupdate" />
+        <button type="button" onclick="update()">Update Soldier</button>
+    </div>
+
+    <div id="showdiv2">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Army Base ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="resultarea2">
+            </tbody>
+        </table>
+    </div>
+
+    <h1>Equipment Catalog</h1>
+
+    <div id="formdiv3">
+        <label>Equipment Data:</label>
+        <input type="text" id="type" />
+        <input type="text" id="description" />
+        <input type="number" id="equipmentweight" />
+        <input type="number" id="soldierid" />
+        <button type="button" onclick="create()">Add Equipment</button>
+    </div>
+
+    <div id="updateformdiv3">
+        <label>Base Data:</label>
+        <input type="text" id="typeupdate" />
+        <input type="text" id="descriptionupdate" />
+        <input type="number" id="equipmentweightupdate" />
+        <input type="number" id="soldieridupdate" />
+        <button type="button" onclick="update()">Update Equipment</button>
+    </div>
+
+    <div id="showdiv3">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Weight</th>
+                    <th>Soldier ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="resultarea3">
+            </tbody>
+        </table>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
 </body>
