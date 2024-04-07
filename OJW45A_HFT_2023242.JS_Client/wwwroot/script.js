@@ -107,8 +107,8 @@ function display() {
     soldiers.forEach(t => {
         document.getElementById('resultarea2').innerHTML += "<tr><td>" + t.id + "</td><td>" + t.name
             + "</td><td>" + t.age + "</td><td>" + t.weight + "</td><td>" + t.armyBaseId +
-            "</td><td>" + `<button type="button" onclick="remove(${t.id})">Delete</button>` +
-            `<button type="button" onclick="showupdate(${t.id})">Update</button>` +
+            "</td><td>" + `<button type="button" onclick="removeSoldier(${t.id})">Delete</button>` +
+            `<button type="button" onclick="showupdateSoldier(${t.id})">Update</button>` +
             "</td></tr>";
     }
     )
@@ -175,6 +175,73 @@ function update() {
                 name: name,
                 numberOfBeds: numberofbeds,
                 dateOfBuild: dateofbuild
+            }),
+    })
+        .then(response => response)
+        .then(data => { console.log('Success:', data); getdata(); })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+
+
+
+function createSoldier() {
+    let name = document.getElementById('soldiername').value;
+    let age = document.getElementById('age').value;
+    let soldierWeight = document.getElementById('soldierweight').value;
+    let baseId = document.getElementById('baseid').value;
+    fetch('http://localhost:36154/soldier', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                name: name,
+                age: age,
+                weight: soldierWeight,
+                armyBaseId: baseId
+            }),
+    })
+        .then(response => response)
+        .then(data => { console.log('Success:', data); getdata(); })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function removeSoldier(id) {
+    fetch('http://localhost:36154/soldier/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', },
+        body: null
+    })
+        .then(response => response)
+        .then(data => { console.log('Success:', data); getdata(); })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function showupdateSoldier(id) {
+    document.getElementById('soldiernameupdate').value = soldiers.find(t => t['id'] == id)['name'];
+    document.getElementById('ageupdate').value = soldiers.find(t => t['id'] == id)['age'];
+    document.getElementById('soldierweightupdate').value = soldiers.find(t => t['id'] == id)['weight'];
+    document.getElementById('baseidupdate').value = soldiers.find(t => t['id'] == id)['armyBaseId'];
+    document.getElementById('updateformdiv2').style.display = 'block';
+    soldierIdToUpdate = id;
+}
+
+function updateSoldier() {
+    document.getElementById('updateformdiv2').style.display = 'none';
+    let name = document.getElementById('soldiernameupdate').value;
+    let age = document.getElementById('ageupdate').value;
+    let soldierWeight = document.getElementById('soldierweightupdate').value;
+    let baseId = document.getElementById('baseidupdate').value;
+    fetch('http://localhost:36154/soldier', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            {
+                id: soldierIdToUpdate,
+                name: name,
+                age: age,
+                weight: soldierWeight,
+                armyBaseId: baseId
             }),
     })
         .then(response => response)
